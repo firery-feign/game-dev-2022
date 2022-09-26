@@ -23,7 +23,10 @@ I do CSS inside the tag. It overpowers all other methods<br>
 }"><br>
 
 
-<textarea style="position:center; left:50; top:0; width:200; height:50;">
+<textarea id="myTextarea" style="position:relative; left:0; top:0; width:200; height:50;">
 Advanced see if you move this textarea
 </textarea><br>
-
+<inpu type=button value=Change onclick="{
+                                        document.getElementById('myTextarea').style.left = '10px'
+                                        }">
+                                        
