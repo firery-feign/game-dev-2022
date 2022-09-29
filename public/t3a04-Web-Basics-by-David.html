@@ -13,6 +13,7 @@
     <hr>
     this is an image <br>
     <img width=200 src="http://hairlesscatblog.com/wp-content/uploads/2014/02/types-of-hairless-cats.jpg"><br><br>
+    <image id="myimage02" src="https://i.kym-cdn.com/entries/icons/original/000/027/115/maxresdefault.jpg" style="position:relative;" width:"80"; height:"80";><br><br>
     <img width=200 src="https://img.republicworld.com/republic-prod/stories/promolarge/xhdpi/aeqilftyemiqcvrp_1587634007.jpeg"><br><br>
     <img width=200 src="https://static.tvtropes.org/pmwiki/pub/images/cxhkobbweamnawn.jpg"><br><br>
     <img width=200 src="https://www.watch-it.amsterdam/wp-content/uploads/2019/04/cropped-Watchitlogo-2.png"><br><br>
@@ -67,19 +68,16 @@
   
 This my loop, I don't know if you want 10 different or one that repeats 10 times....<br>
 But here's a loop!<br>
-  Input the loop here:<input id="myLoopAmount" type=number value='' size=40><br>
-  <input id="myLoopButton" type=button value="Click me for loop!" onclick="{
-                                                         document.getElementById('myLoopDiv').innerhtml = ''
+  Input the loop here:<input id="myLoopAmount" type="number" value='' size=40><br>
+  <input id="myLoopButton" type="button" value="Click me for loop!" onclick="{
+     document.getElementById('myLoopDiv').innerhtml = ''
                                                                            
-                                                         for (myloop = 0; myloop <= document.getElementById('myLoopAmount').value; myloop++){
+     for (myloop = 0; myloop <= document.getElementById('myLoopAmount').value;      myloop++){
                                                             
-                                                            document.getElementById('myLoopDiv').innerhtml += 'You have ran ' + myloop + 'times!<br>'
-                                                         }
+        document.getElementById('myLoopDiv').innerhtml += 'You have ran ' + myloop + 'times!<br>'
+     }
   }"><br><br>
-  <div id=myLoopDiv>...</div>
- <image id="myimage02" src="https://i.kym-cdn.com/entries/icons/original/000/027/115/maxresdefault.jpg" style="position:relative;" width:"80"; height:"80";>
-
-
+  <div id='myLoopDiv'>...</div>
    
     <div id="myDiv01">...</div>
     <body>
