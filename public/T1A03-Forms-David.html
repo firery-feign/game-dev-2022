@@ -6,8 +6,13 @@ The follow are all form elements (add to them):<br>
   
   Enter Your first name:<input type=text id="myText01" value=""><br>
   Checkbox: <br>
-  Beef:<input type=checkbox><br>
-  Veggy: <input type=checkbox><br>
+  Beef:<input type=checkbox id="checkboxbeef"><br>
+  Veggy: <input type=checkbox id="checkboxveggie"><br>
+  if ($("checkboxbeef").attr("checked","checked");){
+    $("#checkboxveggie").removeAttr("checked");
+  }
+  else{
+    ("#checkboxbeef").removeAttr("checked");
   Radio Buttons:<br>
   
   107.7 <input type=radio name="myRad01" value=""><br>
