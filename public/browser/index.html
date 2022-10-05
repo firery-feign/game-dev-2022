@@ -2,11 +2,11 @@
   <div id="main">
 
   
-<canvas id="myGrowCanvas" style="position:absolute; left:0px; top:0px; width:1200px; height:600px; " ></canvas> <br>  
+<canvas id="myGrowCanvas" style="position:absolute; left:0px; top:0px; width:1200px; height:600px; background-Color:grey; " ></canvas> <br>  
    
- <canvas id="myOverlap2" style="position:absolute; left:0px; top:0px; width:120px; height:600px; background:transparent;  " ></canvas>  
+ <canvas id="myOverlap2" style="position:absolute; left:0px; top:0px; width:120px; height:600px; background:transparent; background-Color:gray;  " ></canvas>  
     
-<table border=1 style="position:absolute; left:800px; top:0px;  ">
+<table border=1 style="position:absolute; left:800px; top:0px; background-color:grey; ">
 <tr><td>
   
 Version 0.16.6.92 <br>
@@ -27,10 +27,10 @@ Version 0.16.6.92 <br>
 
       
 
-        Stop Data Collection: <input type=checkbox id="myCheckbox01"><br>
-        Stop All Sounds <input type=checkbox id="myCheckbox02sounds" ><br>
+        Stop Data Collection: <input type=checkbox id="myCheckbox01" style="background-Color:blue;" ><br>
+        Stop All Sounds <input type=checkbox id="myCheckbox02sounds" style="background-Color:blue;" ><br>
         Stop 0 (First) label sound: <input type=checkbox id="myCheckbox03lable0" checked=true><br>
-        <input type=button value="Width -" onclick="{
+        <input type=button value="Width -" style="background-Color:blue;" onclick="{
            document.getElementById('myGrowCanvas').style.width = parseInt(document.getElementById('myGrowCanvas').style.width) - 50                                                                                
         }"><input type=button value="Width +" onclick="{
            document.getElementById('myGrowCanvas').style.width = parseInt(document.getElementById('myGrowCanvas').style.width) + 50         
@@ -42,9 +42,9 @@ Version 0.16.6.92 <br>
         }">   
   
         <br>
-        Camera: <select id="mySelect" onChange="setupPage()"><option  value="user">Front Camera<option selected="selected" value="environment">Rear Camera</select><br>
+        Camera: <select id="mySelect" onChange="setupPage()"><option  value="user" style="background-Color:blue;" >Front Camera<option selected="selected" value="environment">Rear Camera</select><br>
         Default is not mirrored:  see canvas: scaleX(-1);  transform: scaleX(-1);<br>
-        Default GRAYSCALE, Check to use Color <input type=checkbox id="myCheckboxColor"><br><br>
+        Default GRAYSCALE, Check to use Color <input type=checkbox id="myCheckboxColor" style="background-Color:blue;"><br><br>
   
         <div id="myDiv01" style="font-size:30px">...</div>
        <textarea id="myTextArea01" style="display:none; " rows=10 cols=70>...</textarea> <br> <br> <br>
