@@ -18,28 +18,29 @@ document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' +myIn01*my
   }"><br>
 
 
-<input id="myNum02" type=number value="3"><input id="mySign01" type=text value="*"><input id="myNum03" type=number value="8"><br><br>
+<input id="myNum02" type=number value="3"><input id="mySign01" width=10px type=text value="*"><input id="myNum03" type=number value="8"><br><br>
 <input type=button value="Math" onclick="{
   let myIn02 = parseFloat(document.getElementById('myNum02').value)
   let myIn03 = parseFloat(document.getElementById('myNum03').value)
+  let myS01 = document.getElementById('mySign01').value                     
                                          
-  if (mySign01 = 'x'){
+  if (myS01 = 'x'){
     myAnswer01 = myIn02*myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (mySign01 = '*'){
+  if (myS01 = '*'){
     myAnswer01 = myIn02*myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (mySign01 = '+'){
+  if (myS01 = '+'){
     myAnswer01 = myIn02+myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (mySign01 = '-'){
+  if (myS01 = '-'){
     myAnswer01 = myIn02-myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (mySign01 = '/'){
+  if (myS01 = '/'){
     myAnswer01 = myIn02/myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
