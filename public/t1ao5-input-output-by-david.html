@@ -24,23 +24,23 @@ document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' +myIn01*my
   let myIn03 = parseFloat(document.getElementById('myNum03').value)
   let myS01 = document.getElementById('mySign01').value                     
                                          
-  if (myS01 = 'x'){
+  if (myS01 == 'x'){
     myAnswer01 = myIn02*myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (myS01 = '*'){
+  if (myS01 == '*'){
     myAnswer01 = myIn02*myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (myS01 = '+'){
+  if (myS01 == '+'){
     myAnswer01 = myIn02+myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (myS01 = '-'){
+  if (myS01 == '-'){
     myAnswer01 = myIn02-myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
-  if (myS01 = '/'){
+  if (myS01 == '/'){
     myAnswer01 = myIn02/myIn03
     document.getElementById('myDiv01').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
   }
