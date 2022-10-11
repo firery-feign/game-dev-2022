@@ -5,6 +5,26 @@
       background-attachment: fixed;
       background-size: 100% 100%;
    }
+   
+   .animatedDiv01 {
+      background-color: #0a6ef0;
+      border-radius: 15px;
+      width: 50px;
+      height: 50px;
+      animation-name: animatedDiv;
+      animation-duration: infinite;
+      transition-time: 1s;
+   }
+   
+   @keyframes animatedDiv {
+      0% {background-color: #7d0af0; left: 0px; top: 0px;}
+      25% {background-color: #f00a85; left: 25px; top: 0px;}
+      50% {background-color: #f00a0a; left: 50px; top:0px;}
+      75% {background-color: #0af04b; left: 25px; top: 0px;}
+      100% {background-color: #7d0af0; left:0px; top: 0px;}
+   }
+   
+   
 </style>
  
 
@@ -35,4 +55,6 @@ Advanced see if you move this textarea
                                         document.getElementById('myTextarea').style.left = '10px'
                                         }"><br>
                                         
+                                        
+<div class="animatedDiv01"></div>
 
