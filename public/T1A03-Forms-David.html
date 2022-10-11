@@ -5,14 +5,31 @@ The follow are all form elements (add to them):<br>
 <form >
   
   Enter Your first name:<input type=text id="myText01" value=""><br>
+  let myName = document.getElementById('myText01').value
+  document.getElementById('myDiv01').innerHTML = 'Your name: ' + myName
+  <div id='myDiv01'>...</div>
+   
   Checkbox: <br>
-  Beef:<input type=checkbox id="checkboxbeef"><br>
-  Veggy: <input type=checkbox id="checkboxveggie"><br>
+  Beef:<input type=checkbox id="checkboxbeef" onclick="{
+    let myCheckbox = 'beef'
+  }"><br>
+  Veggy: <input type=checkbox id="checkboxveggie" onclick="{
+    let myCheckbox = 'veggie'
+  }"><br>
+  document.getElementById('myDiv02').innerHTML = 'You clicked: ' + myCheckbox
+  <div id='myDiv02'>...</div>
 
   Radio Buttons:<br>
   
-  107.7 <input type=radio name="myRad01" value=""><br>
-  83.5 <input type=radio name="myRad01" value=""><br>
+  107.7 <input type=radio name="myRad01" value="" onclick="{
+    let myRadio = '107.7'
+  }"><br>
+  83.5 <input type=radio name="myRad01" value="" onclick="{
+    let myRadio = '83.5'
+  }"><br>
+  
+  document.getElementById('myDiv03').innerHTML = 'Radio: ' + myRadio
+  <div id="myDiv03">...<div>
   
   Hidden:<input type=hidden><br>
   file:<input type=file><br>
