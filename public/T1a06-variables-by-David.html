@@ -5,37 +5,47 @@
       background-attachment: fixed;
       background-size: 100% 100%;
    }
+   
+   
+   .stupidDiv01 {
+      background-color: lightblue;
+      width: 300px;
+      height 500px;
+      border: 5px outset red;
+      text-align: relative;
+   }
 </style>
  
 
 
 <h4>Version 0.0.1</h4>
+<div class="stupidDiv01">
+   <h2 align=centre>T1A06 Variables By David</h2>
 
-<h2 align=centre>T1A06 Variables By David</h2>
+   <a href="https://www.w3schools.com/js/js_variables.asp">W3Schools explaining variables in javascript</a><br>
 
-<a href="https://www.w3schools.com/js/js_variables.asp">W3Schools explaining variables in javascript</a><br>
+   Other languages use:bool, int, float, char, string, int_08, int_21 etc<br>
 
-Other languages use:bool, int, float, char, string, int_08, int_21 etc<br>
+   Note: Javascript does use var and let for local variables<br>
+   For global variables Mr. Ellis prefers to use document.myVarName
 
-Note: Javascript does use var and let for local variables<br>
-For global variables Mr. Ellis prefers to use document.myVarName
+   <h4>Example input/output</h4>
+   <pre>
+   let myIn01 = document.getElementById('myText01').value
+   docuemtn.getElemmentById('myDiv01').innerHTML = myIn01
+   </pre>
 
-<h4>Example input/output</h4>
-<pre>
-let myIn01 = document.getElementById('myText01').value
-docuemtn.getElemmentById('myDiv01').innerHTML = myIn01
-</pre>
+   <h4>Example working code</h4>
+   <input id="myText01" type=text value="The Dog"><br>
 
-<h4>Example working code</h4>
-<input id="myText01" type=text value="The Dog"><br>
+   <input type=button value="Show Variable" onclick="{
+     let myIn01 = document.getElementById('myText01').value
+     document.getElementById('myDiv01').innerHTML = myIn01
+   }"><br>
 
-<input type=button value="Show Variable" onclick="{
-  let myIn01 = document.getElementById('myText01').value
-  document.getElementById('myDiv01').innerHTML = myIn01
-}"><br>
+   <input type=button value="Using no variable" onclick="{
+     document.getElementById('myDiv01').innerHTML = document.getElementById('myText01').value
+   }"><br>
 
-<input type=button value="Using no variable" onclick="{
-  document.getElementById('myDiv01').innerHTML = document.getElementById('myText01').value
-}"><br>
-
-<div id="myDiv01">...</div>
+   <div id="myDiv01">...</div>
+</div>
