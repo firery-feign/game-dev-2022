@@ -1,46 +1,127 @@
-<h1 align=center>T1A03-Forms-David.html</h1>
-<Font color=blue> Prove you can use: Forms</font>
+<style>
+  
+  .myFormsDiv01 {
+    background-color: lightblue;
+    border: 5px outset red;
+    border-radius: 8px;
+    text-align: relative;
+    margin: auto;
+    width: 300px;
+    height: 500px;
+  }
+  
+  
+  body {
+    background-image: url('https://i.natgeofe.com/n/8a3e578f-346b-479f-971d-29dd99a6b699/nationalgeographic_2751013_16x9.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+  
 
-The follow are all form elements (add to them):<br>
-<form >
-  
-  Enter Your first name:<input type=text id="myText01" value=""><br>
-  let myName = document.getElementById('myText01').value
-  
-   
-  Checkbox: <br>
-  Beef:<input type=checkbox id="checkboxbeef" onclick="{
-    let myCheckbox = 'beef'
-  }"><br>
-  Veggy: <input type=checkbox id="checkboxveggie" onclick="{
-    let myCheckbox = 'veggie'
-  }"><br>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+</style>
+<body>
+
+<body>
+  <div class="myFormsDiv01">
+
+    <h1 align=center>T1A03-Forms-David.html</h1>
+    <Font color=blue> Prove you can use: Forms</font>
+
+    The follow are all form elements (add to them):<br>
+    <form >
+
+      Enter Your first name:<input type=text id="myText01" value=""><br>
+      let myName = document.getElementById('myText01').value
 
 
-  Radio Buttons:<br>
-  
-  107.7 <input type=radio name="myRad01" value="">
+      Checkbox: <br>
+      Beef:<input type=checkbox id="checkboxbeef" onclick="{
+        let myCheckbox = 'beef'
+      }"><br>
+      Veggy: <input type=checkbox id="checkboxveggie" onclick="{
+        let myCheckbox = 'veggie'
+      }"><br>
 
-  83.5 <input type=radio name="myRad01" value="">
 
-  
-  
-  Hidden:<input type=hidden><br>
-  file:<input type=file><br>
-  reset:<input type=reset><br>
-  submit (advanced)<input type=submit><br>
-  
-  Button: <input type=button value="click" onclick="{
-    document.getElementById('myArea01').value = 'cool'
-    }"><br>
-  textarea:<br>
-  <textarea id="myArea01" cols=60 rows=5> wow </textarea><br>
-  
-  select box:<br>
-  <select id="mySelect01" size=2>
-    <option value='myOne'>One
-      <option value='myTwo'>two
-        <option value='myThree'>Three
-  </select>
-</form>
+      Radio Buttons:<br>
+
+      107.7 <input type=radio name="myRad01" value="">
+
+      83.5 <input type=radio name="myRad01" value="">
+
+
+
+      Hidden:<input type=hidden><br>
+      file:<input type=file><br>
+      reset:<input type=reset><br>
+      submit (advanced)<input type=submit><br>
+
+      Button: <input type=button value="click" onclick="{
+        document.getElementById('myArea01').value = 'cool'
+        }"><br>
+      textarea:<br>
+      <textarea id="myArea01" cols=60 rows=5> wow </textarea><br>
+
+      select box:<br>
+      <select id="mySelect01" size=2>
+        <option value='myOne'>One
+          <option value='myTwo'>two
+            <option value='myThree'>Three
+      </select>
+
+    Round Range Slider
+
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      <p>Value: <span id="demo"></span></p>
+    </div>
+
+    <script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+    </script>
+    </form>
 
