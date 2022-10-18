@@ -40,6 +40,28 @@
   }
   
 </style>
+
+<script>
+
+  function loop() {
+    document.getElementById('myDiv01').innerHTML = ''
+    let myTemp = ''
+
+    let myMax = parseInt(document.getElementById('myNum01').value)
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++){
+      if (myLoop*2 >myMax){
+        myTemp += ' cool '
+      }
+
+      myTemp += 'Loop number: ' + myLoop + '\r\n'
+    }
+
+    document.getElementById('myDiv01').innerHTML = myTemp
+  }
+
+</script>
+
 <body>
   <h5>Version 1.2.1-14</h5>
   <div class="mySpecialDiv01">
@@ -53,22 +75,7 @@
     
     Max Loops: <input id="myNum01" type=number style="width:240;" placeholder="Input Number of loops here"> <br>
 
-    <input class="button" value="Loop" readonly onclick="{
-      document.getElementById('myDiv01').innerHTML = ''
-      let myTemp = ''
-
-      let myMax = parseInt(document.getElementById('myNum01').value)
-
-      for (let myLoop = 0; myLoop < myMax; myLoop++){
-        if (myLoop*2 >myMax){
-          myTemp += ' cool '
-        }
-
-        myTemp += 'Loop number: ' + myLoop + '\r\n'
-      }
-
-      document.getElementById('myDiv01').innerHTML = myTemp
-    }">
+    <input class="button" value="Loop" readonly onclick="loop()">
 
     <textarea readonly id="myDiv01" style="width:420; height:150; background-color:#00c4f5; border: 0px #00c4f5; resize:none;">This is a textarea</textarea>
 
