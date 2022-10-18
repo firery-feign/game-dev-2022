@@ -16,6 +16,28 @@
     width: 450px;
   }  
   
+  
+  .button {
+   background-color: #4CAF50;
+   color: black;
+   padding: 5px 5px 5px 5px;
+   text-align: center;
+   float: left;
+   border-radius: 8px;
+   border: 2px outset blue;
+   transition-duration: 0.2s;
+   cursor: pointer;
+   width: 100px;
+  }
+  
+  
+  .button:hover {
+   background-color: blue;
+   border: 2px outset #4CAF50;
+   padding-right:5px;
+    
+  }
+  
 </style>
 <body>
   <h5>Version 1.2.1-14</h5>
@@ -30,7 +52,7 @@
     
     Max Loops: <input id="myNum01" type=number style="width:240;" placeholder="Input Number of loops here"> <br>
 
-    <input type=button value="Basic for loop with decisions" onclick="{
+    <input class="button" value="Basic for loop with decisions" onclick="{
       document.getElementById('myDiv01').innerHTML = ''
       let myTemp = ''
 
