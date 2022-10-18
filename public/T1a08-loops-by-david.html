@@ -49,15 +49,16 @@
     let myMax = parseInt(document.getElementById('myNum01').value)
 
     for (let myLoop = 0; myLoop < myMax; myLoop++){
-      if (myLoop*2 >myMax){
+      if (myLoop*2 >myMax && myLoop != '69'){
         myTemp += ' cool '
       }
 
-      myTemp += 'Loop number: ' + myLoop + '\r\n'
-      
       if (myLoop == '69') {
         myTemp += ' Nice '
       }
+      
+      myTemp += 'Loop number: ' + myLoop + '\r\n'
+      
     }
 
     document.getElementById('myDiv01').innerHTML = myTemp
