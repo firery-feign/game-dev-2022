@@ -1,0 +1,51 @@
+<script>
+    function myExampleFunction() {
+        let myIn01 = parseInt(document.getElementById('myText01').value)
+        let mySum = myIn01 + myIn01
+        let myReply = myIn01 + ' + ' + myIn01 + ' = ' + mySum
+        return myReply
+    }
+</script>
+
+<style>
+    .myDiv01 {
+        background-color: lightblue;
+        border: 5px outset red;
+        width: 400px;
+        height: 750px;
+        border-radius: 8px;
+        text-align: left;
+        align-self: auto;
+    }
+
+    body {
+        background-image: url('https://i.pinimg.com/originals/0f/01/ba/0f01bac2cd274f3eb00444c2b6c3b94b.jpg');
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+</style>
+
+
+<body>
+    <h5>Version 0.0.1</h5>
+    <div class="myDiv01">
+        <a href="https:/www.w3schools.com/js/js_functions.asp">Good reference to javascript functions</a><<br />
+        Functions are used to sensibly organize code. Then they are "Called" elsewhere.<br />Infromation can also be passed to functions (that's more advanced)<br />
+        <h4>Example Functions Code</h4>
+        <pre>
+function myGrabNumber(){
+    return parseInt(document.getElementById(''myText01'))
+}
+</pre>
+
+        <h4>Example working Code</h4>
+
+        <input type="text" id="myText01" value="3" /><br />
+
+        <input type="button" value="funtion example" onclick="{ document.getElementById('myDiv02').innerHTML = myExampleFunction}" />
+
+        <div id="myDiv02">...</div>
+
+    </div>
+</body>
