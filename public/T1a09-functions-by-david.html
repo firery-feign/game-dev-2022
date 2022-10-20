@@ -6,6 +6,64 @@
         return myReply
     }
 
+    function mySurveyFunction() {
+        if (document.getElementById('myPizzaYes').checked == true && document.getElementById('myPizzaNo').checked == true) {
+            document.getElementById('myPizzaYes').checked = false
+            document.getElementById('myPizzaNo').checked = false
+            alert("Please Select Only one option at a time.")
+        } else if (document.getElementById('myPizzaYes').checked == false && document.getElementById('myPizzaNo').checked == false) {
+            alert("Please Check one of the boxes for if you like pizza")
+        } else if (document.getElementById('myPizzaYes').checked == true) {
+            let myPizzaAnswer = 1
+
+        } else {
+            let myPizzaAnswer = 0
+        }
+
+        if (document.getElementById('myStarWars').checked == true && document.getElementById('myStarTrek').checked == true) {
+            document.getElementById('myStarWars').checked = false
+            document.getElementById('myStarTrek').checked = false
+            alert("Please Select Only one option at a time.")
+        } else if (document.getElementById('myStarWars').checked == false && document.getElementById('myStarTrek').checked == false) {
+            alert("Please Check one of the boxes for the better move or show")
+        } else if (document.getElementById('StarWars').checked == true) {
+            let myStarWarsAnswer = 1
+
+        } else {
+            let myStarWarsAnswer = 0
+        }
+
+        if (document.getElementById('myNoLifeYes').checked == true && document.getElementById('MyNoLifeNo').checked == true) {
+            document.getElementById('myNoLifeYes').checked = false
+            document.getElementById('myNoLifeNo').checked = false
+            alert("Please Select Only one option at a time.")
+        } else if (document.getElementById('myNoLifeYes').checked == false && document.getElementById('myNoLifeNo').checked == false) {
+            alert("Please Check one of the boxes for if you have a life or not")
+        } else if (document.getElementById('myNoLifeYes').checked == true) {
+            let myNoLifeAnswer= 1
+
+        } else {
+            let myNoLifeAnswer= 0
+        }
+
+        if (document.getElementById('myFullMarkYes').checked == true && document.getElementById('myFullMarkNo').checked == true) {
+            document.getElementById('myFullMarkYes').checked = false
+            document.getElementById('myFullMarkNo').checked = false
+            alert("Please Select Only one option at a time.")
+        } else if (document.getElementById('myFullMarkYes').checked == false && document.getElementById('myFullMarkNo').checked == false) {
+            alert("Please Check one of the boxes for if you'll give me a full mark")
+        } else if (document.getElementById('myFullMarkYes').checked == true) {
+            let myFullMarkAnswer= 1
+
+        } else {
+            let myFullMarkAnswer= 0
+        }
+
+        let myComparison = parseFloat(myPizzaAnswer + myStarWarsAnswer + myNoLifeAnswer + myFullMarkAnswer)
+        let myPerecnt = (myComparison / 4) * 100
+        document.getElementById('myDiv03').innerHTML = 'You have a ' + myPercent + '% similarity in your answers to mine!'
+    }
+
 </script>
 
 <style>
@@ -46,7 +104,21 @@ function myGrabNumber(){
 
         <input type="button" value="funtion example" onclick="{ document.getElementById('myDiv02').innerHTML = myExampleFunction()}" />
 
-        <div id="myDiv02">...</div>
+        <div id="myDiv02">...</div><br /><br />
 
+        <h2>Survey using functions</h2>
+
+        Name: <input type="text" id="myName01" placeholder="Your name here" /><br />
+        Do you like pizza:<br /> yes: <input type="checkbox" id="myPizzaYes" /> no: <input type="checkbox" id="myPizzaNo" /><br /><br />
+
+        The better tv series:<br /> starwars: <input type="checkbox" id="myStarWars" /> no: <input type="checkbox" id="myStarTrek" /><br /><br />
+
+        Do you have no life and program because you like it?<br /> yes: <input type="checkbox" id="myNoLifeYes" /> no: <input type="checkbox" id="myNoLifeNo" /><br /><br />
+
+        Will you give me a 9 out of 9 for this?<br /> yes: <input type="checkbox" id="myFullMarkYes" /> no: <input type="checkbox" id="myFullMarkNo" /><br /><br />
+
+        <input type="button" value="Submit" onclick="{mySurveyFunction()}" />
+
+        <div id="myDiv03"></div>
     </div>
 </body>
