@@ -1,4 +1,11 @@
 <script>
+    var myPizzaAnswer = 0
+    var myStarWarsAnswer = 0
+    var myNoLifeAnswer = 0
+    var myFullMarkAnswer = 0
+    var myAllAnswered = true
+
+
     function myExampleFunction() {
         let myIn01 = parseInt(document.getElementById('myText01').value)
         let mySum = myIn01 + myIn01
@@ -7,62 +14,90 @@
     }
 
     function mySurveyFunction() {
+        
+        var myAllAnswered = true
+
         if (document.getElementById('myPizzaYes').checked == true && document.getElementById('myPizzaNo').checked == true) {
             document.getElementById('myPizzaYes').checked = false
             document.getElementById('myPizzaNo').checked = false
             alert("Please Select Only one option at a time.")
+            var myAllAnswered = false
         } else if (document.getElementById('myPizzaYes').checked == false && document.getElementById('myPizzaNo').checked == false) {
             alert("Please Check one of the boxes for if you like pizza")
+            var myAllAnswered = false
         } else if (document.getElementById('myPizzaYes').checked == true) {
-            let myPizzaAnswer = 1
+            var myPizzaAnswer = 1
 
         } else {
-            let myPizzaAnswer = 0
+            var myPizzaAnswer = 0
         }
 
         if (document.getElementById('myStarWars').checked == true && document.getElementById('myStarTrek').checked == true) {
             document.getElementById('myStarWars').checked = false
             document.getElementById('myStarTrek').checked = false
             alert("Please Select Only one option at a time.")
+            var myAllAnswered = false
         } else if (document.getElementById('myStarWars').checked == false && document.getElementById('myStarTrek').checked == false) {
             alert("Please Check one of the boxes for the better move or show")
+            var myAllAnswered = false
         } else if (document.getElementById('myStarWars').checked == true) {
-            let myStarWarsAnswer = 1
+            var myStarWarsAnswer = 1
 
         } else {
-            let myStarWarsAnswer = 0
+            var myStarWarsAnswer = 0
         }
 
         if (document.getElementById('myNoLifeYes').checked == true && document.getElementById('myNoLifeNo').checked == true) {
             document.getElementById('myNoLifeYes').checked = false
             document.getElementById('myNoLifeNo').checked = false
             alert("Please Select Only one option at a time.")
+            var myAllAnswered = false
         } else if (document.getElementById('myNoLifeYes').checked == false && document.getElementById('myNoLifeNo').checked == false) {
             alert("Please Check one of the boxes for if you have a life or not")
+            var myAllAnswered = false
         } else if (document.getElementById('myNoLifeYes').checked == true) {
-            let myNoLifeAnswer= 1
+            var myNoLifeAnswer= 1
 
         } else {
-            let myNoLifeAnswer= 0
+            var myNoLifeAnswer= 0
         }
 
         if (document.getElementById('myFullMarkYes').checked == true && document.getElementById('myFullMarkNo').checked == true) {
             document.getElementById('myFullMarkYes').checked = false
             document.getElementById('myFullMarkNo').checked = false
             alert("Please Select Only one option at a time.")
+            var myAllAnswered = false
         } else if (document.getElementById('myFullMarkYes').checked == false && document.getElementById('myFullMarkNo').checked == false) {
             alert("Please Check one of the boxes for if you'll give me a full mark")
+            var myAllAnswered = false
         } else if (document.getElementById('myFullMarkYes').checked == true) {
-            let myFullMarkAnswer= 1
+            var myFullMarkAnswer= 1
 
         } else {
-            let myFullMarkAnswer= 0
+            var myFullMarkAnswer= 0
         }
 
-        let myComparison = parseFloat(myPizzaAnswer + myStarWarsAnswer + myNoLifeAnswer + myFullMarkAnswer)
-        let myPerecnt = (myComparison / 4) * 100
-        document.getElementById('myDiv03').innerHTML = 'You have a ' + myPercent + '% similarity in your answers to mine!'
+        if (myAllAnswered == true) {
+            var myComparison = parseInt(myPizzaAnswer + myStarWarsAnswer + myNoLifeAnswer + myFullMarkAnswer)
+
+            var myPercent = (myComparison / 4) * 100
+
+            document.getElementById('myDiv03').innerHTML = 'Hello ' + document.getElementById('myName01').value + '! ' + 'You have a ' + myPercent + '% similarity in your answers to mine!'
+
+            document.getElementById('myFullMarkYes').checked = false
+            document.getElementById('myFullMarkNo').checked = false
+            document.getElementById('myNoLifeYes').checked = false
+            document.getElementById('myNoLifeNo').checked = false
+            document.getElementById('myStarWars').checked = false
+            document.getElementById('myStarTrek').checked = false
+            document.getElementById('myPizzaYes').checked = false
+            document.getElementById('myPizzaNo').checked = false
+            document.getElementById('myName01').value = ""
+        }
+        
     }
+
+
 
 </script>
 
@@ -111,7 +146,7 @@ function myGrabNumber(){
         Name: <input type="text" id="myName01" placeholder="Your name here" /><br />
         Do you like pizza:<br /> yes: <input type="checkbox" id="myPizzaYes" /> no: <input type="checkbox" id="myPizzaNo" /><br /><br />
 
-        The better tv series:<br /> starwars: <input type="checkbox" id="myStarWars" /> no: <input type="checkbox" id="myStarTrek" /><br /><br />
+        The better tv series:<br /> starwars: <input type="checkbox" id="myStarWars" /> StarTrek: <input type="checkbox" id="myStarTrek" /><br /><br />
 
         Do you have no life and program because you like it?<br /> yes: <input type="checkbox" id="myNoLifeYes" /> no: <input type="checkbox" id="myNoLifeNo" /><br /><br />
 
