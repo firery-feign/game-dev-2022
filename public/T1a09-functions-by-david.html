@@ -111,6 +111,27 @@
         
     }
 
+    function mySpecialFunction() {
+        document.getElementById('myTextArea01').innerHTML = ''
+        let num01 = 100000
+       
+        let repeat = parseInt(num01)
+
+        let nice = ''
+
+        let myLoop = ''
+
+        for (let myTemp = 0; myTemp < repeat; myTemp++) {
+
+            myLoop += nice + 'This has run: ' + myTemp + ' times' + '\r\n'
+
+            if (myTemp == 69) {
+                nice = 'nice '
+            }
+        }
+        document.getElementById('myTextArea01').innerHTML =   myLoop
+    }
+
 
 
 </script>
@@ -131,6 +152,18 @@
         background-attachment: fixed;
         background-size: 100% 100%;
         background-repeat: no-repeat;
+    }
+
+    .button {
+        background-color: navajowhite;
+        height: 45px;
+        width: 150px;
+        text-align: center;
+        padding: 2px 3px 2px 3px;
+        border: 2px solid black;
+        cursor: pointer;
+        color: black;
+
     }
 </style>
 
@@ -172,6 +205,10 @@ function myGrabNumber(){
 
         <input type="button" value="Submit" onclick="{mySurveyFunction()}" />
 
-        <div id="myDiv03"></div>
+        <div id="myDiv03"></div><br /><br />
+
+        <input readonly class="button" type="button" value="Special Functions" onclick="{ mySpecialFunction() }" /><br /><br />
+
+        <textarea readonly id="myTextArea01" style="width:250px; align-self: center; height: 100px; border:0px black; resize: none; background-color:lightblue;"></textarea>
     </div>
 </body>

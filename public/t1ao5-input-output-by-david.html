@@ -19,6 +19,35 @@ body {
 }
 </style>
 
+<script>
+    function myMath01() {
+        let myIn02 = parseFloat(document.getElementById('myNum02').value)
+        let myIn03 = parseFloat(document.getElementById('myNum03').value)
+        let myS01 = document.getElementById('mySign01').value
+
+
+        if (myS01 == '*' || myS01 == 'x') {
+            myAnswer01 = myIn02 * myIn03
+            document.getElementById('myDiv02').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
+        }
+        if (myS01 == '+') {
+            myAnswer01 = myIn02 + myIn03
+            document.getElementById('myDiv02').innerHTML = myIn02 + ' + ' + myIn03 + ' = ' + myAnswer01
+        }
+        if (myS01 == '-') {
+            myAnswer01 = myIn02 - myIn03
+            document.getElementById('myDiv02').innerHTML = myIn02 + ' - ' + myIn03 + ' = ' + myAnswer01
+        }
+        if (myS01 == '/') {
+            myAnswer01 = myIn02 / myIn03
+            document.getElementById('myDiv02').innerHTML = myIn02 + ' / ' + myIn03 + ' = ' + myAnswer01
+        }
+        if (myS01 != '*' && myS01 != '+' && myS01 != '/' && myS01 != 'x' && myS01 != '-') {
+            document.getElementById('myDiv02').innerHTML = 'Please input one of the following for an operator: /, +, -, *.'
+        }
+    }
+</script>
+
 
 <body>
   <div class="myDiv03">
@@ -47,32 +76,7 @@ body {
 
     <input id="myNum02" type=number value="3"><input id="mySign01" style="width:20px" type=text value="*"><input id="myNum03" type=number value="8"><br><br>
     <div id="myDiv02">...</div><br>
-    <input type=button value="Math" onclick="{
-      let myIn02 = parseFloat(document.getElementById('myNum02').value)
-      let myIn03 = parseFloat(document.getElementById('myNum03').value)
-      let myS01 = document.getElementById('mySign01').value                     
-
-      
-      if (myS01 == '*' || myS01 == 'x'){
-        myAnswer01 = myIn02*myIn03
-        document.getElementById('myDiv02').innerHTML = myIn02 + ' * ' + myIn03 + ' = ' + myAnswer01
-      }
-      if (myS01 == '+'){
-        myAnswer01 = myIn02+myIn03
-        document.getElementById('myDiv02').innerHTML = myIn02 + ' + ' + myIn03 + ' = ' + myAnswer01
-      }
-      if (myS01 == '-'){
-        myAnswer01 = myIn02-myIn03
-        document.getElementById('myDiv02').innerHTML = myIn02 + ' - ' + myIn03 + ' = ' + myAnswer01
-      }
-      if (myS01 == '/'){
-        myAnswer01 = myIn02/myIn03
-        document.getElementById('myDiv02').innerHTML = myIn02 + ' / ' + myIn03 + ' = ' + myAnswer01
-      } 
-      if (myS01 != '*' && myS01 != '+' && myS01 != '/' && myS01 != 'x' && myS01 != '-'){
-        document.getElementById('myDiv02').innerHTML = 'Please input one of the following for an operator: /, +, -, *.'
-      }
-    }"><br>                                  
+    <input type=button value="Math" onclick="{ myMath01() }"><br>                                  
   </div>
 </body>
 
