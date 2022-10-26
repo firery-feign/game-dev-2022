@@ -7,14 +7,14 @@
  }
 
  function myBackgroundChange1() {
-  document.getElementByid('background').style.background-image = url('https://quotefancy.com/media/wallpaper/3840x2160/1262630-Topher-Grace-Quote-I-really-need-a-therapist.jpg')
+     document.getElementByid('background').style.background-image = url('https://quotefancy.com/media/wallpaper/3840x2160/1262630-Topher-Grace-Quote-I-really-need-a-therapist.jpg');
  }
 
  function myBackgroundChange2() {
-  document.getElementById('background').stlye.background-image = url('https://wallpapershome.com/images/wallpapers/planet-3840x2160-galaxy-stars-4k-16848.jpg')
+     document.getElementById('background').stlye.background-image = url('https://wallpapershome.com/images/wallpapers/planet-3840x2160-galaxy-stars-4k-16848.jpg');
  }
  
- function getKeyAndMove(e) {
+ function getKeyAndMove() {
   var key_code = e.which || e.keyCode;
   switch (key_code) {
       case 90: //Z arrow key
@@ -49,10 +49,13 @@
   border-radius: 12px;
   border: 2px solid black;
   text-align: left;
-  align-self: left;
  }
  
 </style>
+
+
+ </head>
+
 
 <body id="background" onload="myPain()">
  Version 0.0.1-1 <br>
@@ -90,8 +93,7 @@
   You do at least 8 other events:<br> 
   onClick, onDBClick, onChange, onBlur, onFocus, orMouseMove, onTouch, onKeyDown, onKeyPress, onDragStart, onTouchStart, onTouchEnd, onTouchMove 
   
-  <onkeydown="{getKeyAndMove(e)}">
+  <onkeydown="{getKeyAndMove()}">
   
  </div>
  </body>
-</head>
