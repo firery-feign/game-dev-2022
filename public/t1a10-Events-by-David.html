@@ -1,63 +1,58 @@
 <head>
-<script>
- function myPain() {
-  
-  alert('Here\'s only one, please don\'t give me a negative.')
-  
- }
+    <script>
 
- function myBackgroundChange1() {
-     document.getElementByid('background').style.background-image = url('https://quotefancy.com/media/wallpaper/3840x2160/1262630-Topher-Grace-Quote-I-really-need-a-therapist.jpg');
- }
+     function myBackgroundChange1() {
+         document.getElementByid('background').style.background-image = url('https://quotefancy.com/media/wallpaper/3840x2160/1262630-Topher-Grace-Quote-I-really-need-a-therapist.jpg');
+     }
 
- function myBackgroundChange2() {
-     document.getElementById('background').stlye.background-image = url('https://wallpapershome.com/images/wallpapers/planet-3840x2160-galaxy-stars-4k-16848.jpg');
- }
+     function myBackgroundChange2() {
+         document.getElementById('background').stlye.background-image = url('https://wallpapershome.com/images/wallpapers/planet-3840x2160-galaxy-stars-4k-16848.jpg');
+     }
  
- function getKeyAndMove() {
-  var key_code = e.which || e.keyCode;
-  switch (key_code) {
-      case 90: //Z arrow key
-          myBackgroundChange2();
-          break;
-      case 88: //X arrow key
-          myBackgroundChange1();
-          break;
+     function myBackgroundChange() {
+      var key_code = e.which || e.keyCode;
+      switch (key_code) {
+          case 90: //Z arrow key
+              myBackgroundChange2();
+              break;
+          case 88: //X arrow key
+              myBackgroundChange1();
+              break;
       
 
-  }
+      }
  
  
-</script>
+    </script>
 
 
 
 
-<style>
- body {
- background-image: url('https://wallpapershome.com/images/wallpapers/planet-3840x2160-galaxy-stars-4k-16848.jpg');
- background-repeat: no-repeat;
- background-size: 100% 100%;
- background-attachment: fixed;
+    <style>
+     body {
+     background-image: url('https://wallpapershome.com/images/wallpapers/planet-3840x2160-galaxy-stars-4k-16848.jpg');
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     background-attachment: fixed;
   
- }
+     }
  
- .myDivContainer {
-  background-color: lightblue;
-  width: 500px;
-  height: 800px;
-  border-radius: 12px;
-  border: 2px solid black;
-  text-align: left;
- }
+     .myDivContainer {
+      background-color: lightblue;
+      width: 500px;
+      height: 800px;
+      border-radius: 12px;
+      border: 2px solid black;
+      text-align: left;
+     }
  
-</style>
+    </style>
 
 
  </head>
 
 
-<body id="background" onload="myPain()">
+<body id="background" onload="{alert('There is only one and it\'s to showcase the \'onload\' event') }">
  Version 0.0.1-1 <br>
  <div class="myDivContainer">
   <h2 align=center>t1a10-Events-by-david.html</h2> 
@@ -93,7 +88,7 @@
   You do at least 8 other events:<br> 
   onClick, onDBClick, onChange, onBlur, onFocus, orMouseMove, onTouch, onKeyDown, onKeyPress, onDragStart, onTouchStart, onTouchEnd, onTouchMove 
   
-  <onkeydown="{getKeyAndMove()}">
+  <onkeydown="{myBackgroundChange()}">
   
  </div>
  </body>
