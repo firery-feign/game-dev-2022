@@ -4,8 +4,13 @@
             document.getElementById('myDivContainer01').style.backgroundColor = "red";
         }
 
+
         function myBackground2() {
             document.getElementById('myDivContainer01').style.backgroundColor = "lightblue";
+        }
+
+        function myBackground3() {
+            document.getelementById('myDivContainer01').style.backgroundColor = "yellow"
         }
  
  
@@ -45,6 +50,8 @@
   <a href="https://way2tutorial.com/html/html5_events_handler_list.php">
    Good reference to HTM1 Events</a> <br>
 
+    There\'s an onload thing so please be patient
+
   Events are HTML code that activates Javascript code 
 
   <h4> Example Events code</h4> 
@@ -73,7 +80,7 @@
   You do at least 8 other events:<br> 
   onClick, onDBClick, onChange, onBlur, onFocus, orMouseMove, onTouch, onKeyDown, onKeyPress, onDragStart, onTouchStart, onTouchEnd, onTouchMove 
   
-    <input type="text" placeholder="Type here to change the background color!" style="width:100px;" id="myText01" onkeydown="{ myBackground1() }" onkeyup="{ myBackground2() }" />
+    <input type="text" placeholder="Type here to change the background color!" style="width:100px;" id="myText01" onkeydown="{ myBackground1() }" onkeyup="{ myBackground2() }" onkeypress="{myBackground3() }"/>
 
 
   
