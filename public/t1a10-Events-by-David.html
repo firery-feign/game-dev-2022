@@ -1,20 +1,32 @@
 
-    <script>
-        function myBackground1() {
-            document.getElementById('myDivContainer01').style.backgroundColor = "red";
-        }
+<script>
+    function myBackground1() {
+        document.getElementById('myDivContainer01').style.backgroundColor = "red";
+    }
 
 
-        function myBackground2() {
-            document.getElementById('myDivContainer01').style.backgroundColor = "lightblue";
-        }
+    function myBackground2() {
+        document.getElementById('myDivContainer01').style.backgroundColor = "lightblue";
+    }
 
-        function myBackground3() {
-            document.getElementById('myDivContainer01').style.backgroundColor = "yellow"
-        }
- 
- 
-    </script>
+    function myBackground3() {
+        document.getElementById('myDivContainer01').style.backgroundColor = "yellow";
+    }
+
+    function myMouseOverFun() {
+        document.getElementById('myBoxDiv').style.backgroundColor = "blue";
+        document.getElementById('myBoxDiv').style.width = "90px";
+        document.getElementById('myBoxDiv').style.height = "90px";
+    }
+
+    function myMouseOutFun() {
+        document.getElementById('myBoxDiv').style.backgroundColor = "green";
+        document.getElementById('myBoxDiv').style.width = "100px";
+        document.getElementById('myBoxDiv').style.height = "100px";
+    }
+
+
+</script>
 
 
 
@@ -50,7 +62,7 @@
   <a href="https://way2tutorial.com/html/html5_events_handler_list.php">
    Good reference to HTM1 Events</a> <br>
 
-    There\'s an onload thing so please be patient<br />
+    There's an onload thing so please be patient<br />
 
   Events are HTML code that activates Javascript code 
 
@@ -83,7 +95,7 @@
   
     <input type="text" placeholder="Type here to change the background color!" style="width:100px;" id="myText01" onkeydown="{ myBackground1() }" onkeyup="{ myBackground2() }" onkeypress="{myBackground3() }"/>
 
-
+     <div id="myBoxDiv" onmouseover="{myMouseOverFun() }" onmouseout="{myMouseOutFun() }">Hover over this to change it's color and size</div>
   
  </div>
  </body>
