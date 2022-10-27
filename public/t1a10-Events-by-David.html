@@ -1,11 +1,11 @@
 
     <script>
         function myBackground1() {
-            document.getElementsByClassName('myDivContainer').style.backgroundcolor = red;
+            document.getElementById('myDivContainer').style.backgroundColor = red;
         }
 
         function myBackground2() {
-            document.getElementsByClassName('myDivContainer').style.backgroundcolor = lightblue;
+            document.getElementById('myDivContainer').style.backgroundColor = lightblue;
         }
  
  
@@ -73,7 +73,7 @@
   You do at least 8 other events:<br> 
   onClick, onDBClick, onChange, onBlur, onFocus, orMouseMove, onTouch, onKeyDown, onKeyPress, onDragStart, onTouchStart, onTouchEnd, onTouchMove 
   
-    <input type="text" placeholder="Type here to change the background color!" id="myText01" onkeydown="myBackground1" onkeyup="myBackground2" />
+    <input placeholder="Type here to change the background color!" style="width=100px;" id="myText01" onkeydown="myBackground1" onkeyup="myBackground2" />
 
 
   
