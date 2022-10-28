@@ -34,7 +34,7 @@
         const myArray = [0]
         let myMax = parseInt(document.getElementById('mymaxtext').value)
         for (let myLoop = 0; myLoop < myMax; myLoop++) {
-            
+
             myArray.push(myLoop)
 
             document.getElementById('myArrayTextarea').innerHTML = 'Current Storing: ' + myArray + '\r\n'
@@ -42,6 +42,27 @@
 
 
     }
+
+    
+    function myRandomArray() {
+
+        let myMinNum = parseInt(document.getElementById('myMinNum').value);
+        let myMaxNum = parseInt(document.getElementById('myMaxNum').value);
+
+        let myMaxLoops = parseInt(document.getElementById('myMaxLoops').value)
+
+        const randArray = [];
+
+        for (let myLoop = 0; myLoop < myMaxLoops; myLoop++) {
+            let randNum = Math.floor(Math.random() * (myMaxNum - myMinNum + 1)) + myMinNum;
+            
+            randArray.push(randNum);
+            
+        }
+        document.getElementById('myRandTextArray').innerHTML = 'The Stored numbers:\r\n' + randArray
+
+    }
+
 
 
 </script>
@@ -78,8 +99,8 @@
                myArray[1]='Mary'
                myArray[2]='Zizzy'
                for (let myLoop=0; myLoop < myTemp;  myLoop++) {
-                  mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
-               }
+        mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
+        }
         document.getElementById('myDiv01').innerHTML = mySum
         }">
 
@@ -95,6 +116,16 @@
 
         Enter max value for array:<input type="text" id="mymaxtext" placeholder="Number Here" size="10" /><br />
         <input type="button" value="Show  Array" onclick="{LoopedArray() }" /><br /><br />
-        <textarea readonly style="width: 180px; height: 180px; resize:none;" id="myArrayTextarea">Stores values in a array using array.push to add a value to the array</textarea>
+        <textarea readonly style="width: 180px; height: 180px; resize:none;" id="myArrayTextarea">Stores values in a array using array.push to add a value to the array</textarea><br /><br />
+
+        Random number stored in an array decided by the user:<br />
+        <input type="number" id="myMinNum" placeholder="Minimum Number" size="40" /><br />
+        <input type="number" id="myMaxNum" placeholder="Maximum Number" size="40" /><br />
+        Max Number of Loops: <input type="text" id="myMaxLoops" /><br />
+        <input type="button" value="Submit" onclick="{myRandomArray()}"/><br />
+        <textarea readonly style="width: 260px; height: 200px; resize:none" id="myRandTextArray" ></textarea>
+        
+
+        
     </div>
 </body>
