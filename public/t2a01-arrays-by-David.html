@@ -64,6 +64,14 @@
     }
 
 
+    function normalArral() {
+        const array = []
+        array.push(document.getElementById('name').value)
+        array.push(document.getElementById('age').value)
+        array.push(document.getElementById('SocialInsuranceNumber').value)
+        document.getElementById('normalArray').innerHTML = 'Name: ' + array[0]  +' Age: ' + array[1] + ' SIN #: ' + array[2]
+    }
+
 
 </script>
 
@@ -123,7 +131,14 @@
         <input type="number" id="myMaxNum" placeholder="Maximum Number" size="40" /><br />
         Max Number of Loops: <input type="text" id="myMaxLoops" /><br />
         <input type="button" value="Submit" onclick="{myRandomArray()}"/><br />
-        <textarea readonly style="width: 260px; height: 200px; resize:none" id="myRandTextArray" ></textarea>
+        <textarea readonly style="width: 260px; height: 200px; resize:none" id="myRandTextArray" ></textarea><br /><br /><br />
+        
+        <input type="text" id="name" placeholder="Name" size="40" /><br />
+        <input type="text" id="age" placeholder="Age" size="20" /><br />
+        <input type="text" id="SocialInsuranceNumber" placeholder="SIN number" size="50" /><br />
+        <input type="button" value="Submit for Verification" onclick="{normalArral() }" /><br />
+
+        <div id="normalArray"></div>
         
 
         
