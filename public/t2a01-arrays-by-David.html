@@ -1,46 +1,100 @@
+<style>
+    body {
+        background-image: url('https://c4.wallpaperflare.com/wallpaper/616/719/787/stars-planet-space-mountains-wallpaper-preview.jpg');
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    .myDivContainer {
+        width: 600px;
+        height: 1200px;
+        background-color: lightblue;
+        border: 2px solid black;
+        border-radius: 8px;
+    }
+
+</style>
+
+<script>
 
 
-Version 0.0.1
+    function InfiniteArray() {
+        myArray = []
+        document.getElementById('infinitearray').innerHTML = ''
 
-<h2 align=center>t2a01-arrays-by-David.html</h2>
+        myArray = document.getElementById('myTextArray').value.split(',')
 
-<a href="">Good reference to Javasccript Arrays</a><br>
+        for (myIndex in myArray) {
+            document.getElementById('infinitearray').innerHTML += myIndex + ' stores : ' + myArray[myIndex] + '<br>'
+        }
+    }
 
-Arrays are stored numbered variables
+    function LoopedArray() {
+        const myArray = [0]
+        let myMax = parseInt(document.getElementById('mymaxtext').value)
+        for (let myLoop = 0; myLoop < myMax; myLoop++) {
+            
+            myArray.push(myLoop)
 
-<h4> Example Array code</h4>
-<pre>
-   myArray = new Array()
-   myArray[0] = 'Fred'
-   myArray[1] = 'Mary'
-
-</pre>
-
-<h4> Example working Array code</h4>
-
-
-Max Array Entry: <input type=text id="myText01" value="3"><br>
-
-<input type=button value="Example onClick" onClick="{
-   let myTemp = document.getElementById('myText01').value
-   let mySum = ''
-   document.getElementById('myDiv01').innerHTML = ' '
-
-   myArray = new Array()
-   myArray[0] = 'Fred'
-   myArray[1] = 'Mary'
-   myArray[2] = 'Zizzy'
-
-   for (let myLoop=0;   myLoop < myTemp;  myLoop++){
-      mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
-   }
-   document.getElementById('myDiv01').innerHTML = mySum
-}">
-
-<div id="myDiv01">...</div>
+            document.getElementById('myArrayTextarea').innerHTML = 'Current Storing: ' + myArray + '\r\n'
+        }
 
 
-<br>
+    }
 
-You do at least 7 other arrays:<br>
 
+</script>
+
+
+<body>
+    Version 0.0.1-1
+    <div class="myDivContainer">
+        <h2 align=center>t2a01-arrays-by-David.html</h2>
+
+        <a href="https://www.w3schools.com/js/js_arrays.asp">Good reference to Javasccript Arrays</a><br>
+
+        Arrays are stored numbered variables
+
+        <h4> Example Array code</h4>
+        <pre>
+           myArray = new Array()
+           myArray[0] = 'Fred'
+           myArray[1] = 'Mary'
+
+        </pre>
+
+        <h4> Example working Array code</h4>
+
+
+        Max Array Entry: <input type=text id="myText01" value="3"><br>
+
+        <input type="button" value="Example onClick" onClick="{
+               let myTemp=document.getElementById('myText01').value
+               let mySum=''
+               document.getElementById('myDiv01').innerHTML=' '
+               myArray=new Array()
+               myArray[0]='Fred'
+               myArray[1]='Mary'
+               myArray[2]='Zizzy'
+               for (let myLoop=0; myLoop < myTemp;  myLoop++) {
+                  mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
+               }
+        document.getElementById('myDiv01').innerHTML = mySum
+        }">
+
+        <div id="myDiv01">...</div>
+
+
+        <br>
+
+        You do at least 7 other arrays:<br>
+        Numbers here please:<input type="text" id="myTextArray" value="3, 7, 9" size="10"><br />
+        <input type="button" value="numbered array" onclick="{InfiniteArray()}" /><br />
+        <div id="infinitearray"></div><br /><br />
+
+        Enter max value for array:<input type="text" id="mymaxtext" placeholder="Number Here" size="10" /><br />
+        <input type="button" value="Show  Array" onclick="{LoopedArray() }" /><br /><br />
+        <textarea readonly style="width: 180px; height: 180px; resize:none;" id="myArrayTextarea">Stores values in a array using array.push to add a value to the array</textarea>
+    </div>
+</body>
