@@ -25,6 +25,8 @@
         document.getElementById('myBoxDiv').style.height = "100px";
     }
 
+    let txtchar = document.getElementById()
+
 
 </script>
 
@@ -95,7 +97,13 @@
   
     <input type="text" placeholder="Type here to change the background color!" style="width:180px;" id="myText01" onkeydown="{ myBackground1() }" onkeyup="{ myBackground2() }" onkeypress="{myBackground3() }"/>
 
-     <div id="myBoxDiv" onmouseover="{myMouseOverFun() }" onmouseout="{myMouseOutFun() }">Hover over this to change it's color and size</div>
-  
+     <div id="myBoxDiv" onmouseover="{myMouseOverFun() }" onmouseout="{myMouseOutFun() }">Hover over this to change it's color and size</div><br />
+
+
+     <input type="hidden" value="double click me" ondbclick="document.getElementById('myHiddenDiv').innerHTML = Wow;" />
+     <div id="myHiddenDiv"></div>
+    
+
+
  </div>
  </body>
