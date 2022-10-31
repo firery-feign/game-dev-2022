@@ -62,9 +62,9 @@
   <h2 align=center>t1a10-Events-by-david.html</h2> 
 
   <a href="https://way2tutorial.com/html/html5_events_handler_list.php">
-   Good reference to HTM1 Events</a> <br>
+   Good reference to HTM1 Events</a> <br><br />
 
-    There's an onload thing so please be patient<br />
+    <b><i>There's an onload thing so please be patient</i></b><br /><br />
 
   Events are HTML code that activates Javascript code 
 
@@ -97,13 +97,13 @@
   
     <input type="text" placeholder="Type here to change the background color!" style="width:180px;" id="myText01" onkeydown="{ myBackground1() }" onkeyup="{ myBackground2() }" onkeypress="{myBackground3() }"/>
 
-     <div id="myBoxDiv" onmouseover="{myMouseOverFun() }" onmouseout="{myMouseOutFun() }">Hover over this to change it's color and size</div><br />
+     <div id="myBoxDiv" style="background-color: green; width:100px; height:100px;" onmouseover="{myMouseOverFun() }" onmouseout="{myMouseOutFun() }">Hover over this to change it's color and size</div><br />
 
 
-     <input type="hidden" value="double click me" ondbclick="document.getElementById('myHiddenDiv').innerHTML = Wow;" />
+     <p id="wow" ondblclick="document.getElementById('wow').innerHTML = 'wow you did it!'">Double click me!</p>
      <div id="myHiddenDiv"></div>
     
-
+     
 
  </div>
  </body>
