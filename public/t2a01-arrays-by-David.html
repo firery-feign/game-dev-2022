@@ -4,6 +4,7 @@
         background-attachment: fixed;
         background-size: 100% 100%;
         background-repeat: no-repeat;
+
     }
 
     .myDivContainer {
@@ -72,11 +73,25 @@
         document.getElementById('normalArray').innerHTML = 'Name: ' + array[0]  +' Age: ' + array[1] + ' SIN #: ' + array[2]
     }
 
+    const imgArray = ["https://c4.wallpaperflare.com/wallpaper/616/719/787/stars-planet-space-mountains-wallpaper-preview.jpg", "https://wallpapercave.com/wp/wp9418111.jpg"]
+
+    function imgArraynormal() {
+
+        let img = imgArray[0]
+        document.body.style.backgroundImage = "url(" + img + ")";
+    }
+
+    function imgArraychanged() {
+
+        let img = imgArray[1]
+        document.body.style.backgroundImage = "url(" + img + ")";
+
+    }
 
 </script>
 
 
-<body>
+<body id="bodybck">
     Version 0.0.1-1
     <div class="myDivContainer">
         <h2 align=center>t2a01-arrays-by-David.html</h2>
@@ -138,7 +153,10 @@
         <input type="text" id="SocialInsuranceNumber" placeholder="SIN number" size="50" /><br />
         <input type="button" value="Submit for Verification" onclick="{normalArral() }" /><br />
 
-        <div id="normalArray"></div>
+        <div id="normalArray"></div><br /><br />
+
+        <input type="button" value="Normal Background" onclick="{imgArraynormal() }" />
+        <input type="button" value="Change the background" onclick="{imgArraychanged() }" />
         
 
         
