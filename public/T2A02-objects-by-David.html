@@ -3,11 +3,10 @@
 
     .myFancyDiv {
         background-color: #575656;
-        width:500px;
-        height:1200px;
+        width: 500px;
+        height: 1200px;
         border: 2px solid black;
         border-radius: 12px;
-
     }
 
     body {
@@ -16,13 +15,66 @@
         background-repeat: no-repeat;
         background-size: 100% 100%
     }
-
-
 </style>
 
 
 <script>
+    function myperson() {
+        let myPerson = {
+            'firstName': 'John',
+            'lastName': 'Doe',
+            'age': 50,
+            'eyeColor': 'blue'
+        }
+        document.getElementById('myDiv01').innerHTML = '<br>myPerson Object has properties: <br>'
+        document.getElementById('myDiv01').innerHTML += 'firstName: ' + myPerson.firstName + '<br>'
+        document.getElementById('myDiv01').innerHTML += 'You do the others  <br>Like this: <br>LastName: ' + myPerson.lastName + '<br>Age:' + myPerson.age + '<br>EyeColor: ' + myPerson.eyeColor
 
+    }
+
+
+    
+    myObArray = [
+        {
+        'Abstract_dark': 'https://free4kwallpapers.com/uploads/originals/2020/05/14/random-abstract-beauty-wallpaper.jpg',
+        'Space_Cat': 'https://c4.wallpaperflare.com/wallpaper/686/224/886/cat-space-wallpaper-preview.jpg',
+        'Abstract_Asthetic': 'https://images3.alphacoders.com/108/thumb-1920-1082567.jpg',
+        'Doggo_W_Onion': 'https://cdn.mwallpapers.com/photos/celebrities/other/share-your-desktop-wallpaper-random-android-iphone-hd-wallpaper-background-downloadhd-wallpapers-desktop-background-android-iphone-1080p-4k-zgoe1.jpg'
+
+        },
+        {
+
+        'crust_type': '',
+        'topping': '',
+        'sauce' : ''
+        }
+    ]
+        
+    function myPizzaFunction() {
+
+        if (document.getElementById('myThinCrust').checked == true) {
+            myObArray[1].crust_type = 'Thin Crust'
+        }
+
+        if (document.getElementById('myStandardCrust').checked == true ) {
+            myObArray[1].crust_type = 'Standard Crust'
+        }
+
+        if (document.getElementById('myStuffedCrust').checked == true) {
+            myObArray[1].crust_type = 'Stuffed Crust'
+        }
+
+
+        myObArray[1].topping = document.getElementById('myPizzaTopping').value 
+
+        myObArray[1].sauce = document.getElementById('mySaucez').value
+
+        document.getElementById('myTextArea').innerHTML = 'Crust Type: ' + myObArray[1].crust_type + '\r\n' + 'Sauce: ' + myObArray[1].sauce + '\r\n' + 'Toppings: ' + myObArray[1].topping
+
+    }
+
+
+    
 
 </script>
 
@@ -52,28 +104,39 @@
 
         <h4> Example working Objects code</h4>
 
-        Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
 
-
-        <input type=button value="Example Object Set and Show" onClick="{
-
-          let myPerson = {   
-            'firstName' : 'John',
-            'lastName'  : 'Doe',
-            'age'       :  50,
-            'eyeColor'  : 'blue'
-          }
-
-           document.getElementById('myDiv01').innerHTML = '<br>myPerson Object has properties: <br>'
-           document.getElementById('myDiv01').innerHTML += 'firstName: ' + myPerson.firstName + '<br>'
-           document.getElementById('myDiv01').innerHTML += 'You do the others  <br>Like this: <br>LastName: '+myPerson.lastName+'<br>Age:' +myPerson.age+ '<br>EyeColor: ' +myPerson.eyeColor
-
-        }">
+        <input type=button value="Example Object Set and Show" onClick="{myperson()}">
 
         <div id="myDiv01">...</div>
 
 
         <br>
+
+
+
+        Choose your own background for the page:
+        <input type="button" value="Abstract Dark" onclick="{document.body.style.backgroundImage = 'url(' + myObArray[0].Abstract_dark + ')'; }" />
+        <input type="button" value="Space Cat" onclick="{document.body.style.backgroundImage = 'url(' + myObArray[0].Space_Cat + ')';  }" />
+        <input type="button" value="Abstract Asthetic" onclick="{document.body.style.backgroundImage = 'url(' + myObArray[0].Abstract_Asthetic + ')';  }" />
+        <input type="button" value="Doggo with an onion" onclick="{document.body.style.backgroundImage = 'url(' + myObArray[0].Doggo_W_Onion + ')';  }" /><br /><br />
+
+
+        <h2>Create Your Own Pizza!</h2>
+        Toppings: <input type="text" id="myPizzaTopping" /><br /><br />
+        
+        Pick crust:<br />
+        Thin Crust: <input type="checkbox" id="myThinCrust" onclick="{ document.getElementById('myStandardCrust').checked = false; document.getElementById('myStuffedCrust').checked = false }"/><br />
+        Standard Crust: <input type="checkbox" id="myStandardCrust" onclick="{ document.getElementById('myThinCrust').checked = false; document.getElementById('myStuffedCrust').checked = false }"/><br />
+        Stuffed Crust: <input type="checkbox" id="myStuffedCrust" onclick="{ document.getElementById('myStandardCrust').checked = false; document.getElementById('myThinCrust').checked = false }" /><br /><br />
+        
+        Input Sauce: <input type="text" id="mySaucez" /><br /><br />
+
+        <input type="button" value="Submit" onclick="{myPizzaFunction() }" /><br />
+
+        <textarea readonly id="myTextArea" style="width: 200px; height: 200px; resize: none;"></textarea>
+
+
+
 
 
 
