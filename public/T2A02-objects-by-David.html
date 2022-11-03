@@ -4,7 +4,7 @@
     .myFancyDiv {
         background-color: #575656;
         width: 500px;
-        height: 1200px;
+        height: 1800px;
         border: 2px solid black;
         border-radius: 12px;
     }
@@ -73,6 +73,12 @@
 
     }
 
+    function userObj() {
+
+        
+
+    }
+
 
     
 
@@ -123,17 +129,27 @@
 
         <h2>Create Your Own Pizza!</h2>
         Toppings: <input type="text" id="myPizzaTopping" /><br /><br />
-        
+
         Pick crust:<br />
-        Thin Crust: <input type="checkbox" id="myThinCrust" onclick="{ document.getElementById('myStandardCrust').checked = false; document.getElementById('myStuffedCrust').checked = false }"/><br />
-        Standard Crust: <input type="checkbox" id="myStandardCrust" onclick="{ document.getElementById('myThinCrust').checked = false; document.getElementById('myStuffedCrust').checked = false }"/><br />
+        Thin Crust: <input type="checkbox" id="myThinCrust" onclick="{ document.getElementById('myStandardCrust').checked = false; document.getElementById('myStuffedCrust').checked = false }" /><br />
+        Standard Crust: <input type="checkbox" id="myStandardCrust" onclick="{ document.getElementById('myThinCrust').checked = false; document.getElementById('myStuffedCrust').checked = false }" /><br />
         Stuffed Crust: <input type="checkbox" id="myStuffedCrust" onclick="{ document.getElementById('myStandardCrust').checked = false; document.getElementById('myThinCrust').checked = false }" /><br /><br />
-        
+
         Input Sauce: <input type="text" id="mySaucez" /><br /><br />
 
         <input type="button" value="Submit" onclick="{myPizzaFunction() }" /><br />
 
-        <textarea readonly id="myTextArea" style="width: 200px; height: 200px; resize: none;"></textarea>
+        <textarea readonly id="myTextArea" style="width: 200px; height: 200px; resize: none;"></textarea><br />
+
+        <h2>Lets create an object that we will push into an array ourselves through user input!</h2>
+
+        Your first object: <input type="text" placeholder="Obj Name" id="objectname1" /><input type="text" placeholder="Obj Value" id="objectval1" /><br />
+        Second Object!: <input type="text" placeholder="Obj Name" id="objectname2" /><input type="text" placeholder="Obj Value" id="objectval2" /><br />
+        Third Object: <input type="text" placeholder="Obj Name" id="objectname3" /><input type="text" placeholder="Obj Value" id="objectval3" /><br />
+
+        <input type="button" value="Submit" onclick="{userObj() }" /><br />
+
+        <textarea readonly style="width:200px; height:200px; resize: none;" id="UserMadeObj"></textarea>
 
 
 
