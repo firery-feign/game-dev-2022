@@ -1,12 +1,11 @@
 <style>
 .myFunDiv {
     background-color: lightblue;
-    margin: 20px;
-    padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
     width: 500px;
     height: 1600px;
+    
   
 }
 
@@ -15,6 +14,29 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%
+}
+
+
+.button {
+    background-color: #ed1a87;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    border-radius: 16px;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: auto;
+    width: 120px;
+}
+
+.button:hover {
+    background-color: blue;
+    color: white;
+    padding-right: 10px;
 }
 </style>
 
@@ -31,6 +53,31 @@ function exampleClass() {
     }  // end class myAnimal
     myDog = new myAnimal('Snickers', 5)
     myDog.myShow()  
+}
+
+
+function myFunClass() {
+    class pizza {
+        constructor(topping, sauce, crust, size, extra) {
+            this.mytopping = topping;
+            this.mysauce = sauce;
+            this.mycrust = crust;
+            this.mysize = size;
+            this.myextra = extra;
+        }
+        myPizza() {
+            document.getElementById('myDiv02').innerHTML = 'Your pizza has:<br>Topping: ' + this.mytopping + ',<br>Sauce: ' + this.mysauce + ',<br>Crust: ' + this.mycrust + ',<br>Size ' + this.mysize + ',<br>Extras: ' + this.myextra + '<br>'
+        }
+    } // end class pizza
+    myToppings = document.getElementById('myTopping').value;
+    mySauce = document.getElementById('mySauce').value;
+    myCrust = document.getElementById('myCrust').value;
+    mySize = document.getElementById('mySize').value;
+    myExtra = document.getElementById('myExtra').value;
+
+    myFinishedPizza = new pizza(myToppings, mySauce, myCrust, mySize, myExtra);
+    myFinishedPizza.myPizza();
+    
 }
 
 </script>
@@ -54,7 +101,8 @@ Version 0.0.1
         this.myAge = passAge;
         }
         myShow(){    
-        document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName + '. You are ' + this.myAge + ' years old<br>'
+        document.getElementById('myDiv01').innerHTML = 'Hello '+ this.
+        myName + '. You are ' + this.myAge + ' years old<br>'
         }
     myDog = new myAnimal('Snickers', 5)
     myDog.myShow()  
@@ -62,10 +110,24 @@ Version 0.0.1
     </pre>
 
     <h4> Example working Classes code</h4>
-    Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
+    
     <input type=button value="Example Class Set and Show Class Animal" onClick="{exampleClass()}">
 
     <div id="myDiv01">...</div>
+
+    <h4> My Classses code</h4>
+
+    <p>Make Your own PIZZA!</p>
+    <input type="text" id="myTopping" placeholder="Topping"><br>
+    <input type="text" id="mySauce" placeholder="Sauce"><br>
+    <input type="text" id="myCrust" placeholder="Crust"><br>
+    <input type="text" id="mySize" placeholder="Size"><br>
+    <input type="text" id="myExtra" placeholder="Extra"><br>
+
+    <button type="button" class="button" onclick="myFunClass()">Submit</button><br>
+
+    <myDiv02 id="myDiv02">...</myDiv02>
+
 
 </div>
 

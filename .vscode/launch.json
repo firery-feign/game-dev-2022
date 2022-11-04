@@ -4,12 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open T2A02-objects-by-David.html",
-            "file": "c:\\Users\\onesh\\game-dev-2022-1\\public\\T2A02-objects-by-David.html"
+            "name": "T2a03-Classes-By-David.html",
+            "file": "c:\\Users\\onesh\\game-dev-2022-1\\public\\T2a03-Classes-By-David.html"
         }
     ]
 }
