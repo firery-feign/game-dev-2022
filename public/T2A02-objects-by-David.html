@@ -7,6 +7,7 @@
         height: 1800px;
         border: 2px solid black;
         border-radius: 12px;
+        
     }
 
     body {
@@ -76,12 +77,12 @@
     //a function that takes user input and stores it in an object then pushes it to an array
 
     function myUserObj() {
-        myName1 = document.getElementById('myobjname1').value
-        myName2 = document.getElementById('myobjname2').value
-        myName3 = document.getElementById('myobjname3').value
-        myVal1 = document.getElementById('myobjval1').value
-        myVal2 = document.getElementById('myobjval2').value
-        myVal3 = document.getElementById('myobjval3').value
+        myName1 = document.getElementById('objectname1').value
+        myName2 = document.getElementById('objectname2').value
+        myName3 = document.getElementById('objectname3').value
+        myVal1 = document.getElementById('objectval1').value
+        myVal2 = document.getElementById('objectval2').value
+        myVal3 = document.getElementById('objectval3').value
 
 
 
@@ -93,14 +94,12 @@
             
         }
 
-        myObArray.push(myObject)
+        myObArray.push(myUserObject)
 
         document.getElementById('UserMadeObj').innerHTML = 'myUserObject has properties: \r\n' + myName1 + ': ' + myVal1 + '\r\n' + myName2 + ': ' + myVal2 + '\r\n' + myName3 + ': ' + myVal3 + '\r\n'
 
         
     }
-    
-
 
     
 
