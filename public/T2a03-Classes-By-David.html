@@ -16,6 +16,14 @@ body {
     background-size: 100% 100%
 }
 
+#bg {
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/946/600/987/windows-smooth-transition-wallpaper-preview.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%
+    animation: bgshiftleft 5s linear infinite;
+}
+
 
 .button {
     background-color: #ed1a87;
@@ -37,6 +45,14 @@ body {
     background-color: blue;
     color: white;
     padding-right: 10px;
+}
+
+@keyframes bgshiftleft {
+    from{
+        background-position: 0 0;
+    } to {
+        background-position: -100% 0;
+    }
 }
 </style>
 
@@ -86,7 +102,7 @@ function myFunClass() {
 </script>
 
 
-<body>
+<body id="bg">
 Version 0.0.1
 <div class="myFunDiv">
     
