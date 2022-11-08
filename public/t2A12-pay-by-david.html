@@ -1,0 +1,72 @@
+<style>
+body {
+    background-image: url('https://i.redd.it/qmfjuz883g7z.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.myDiv01 {
+    
+    background-color: lightblue;
+    border: 3px solid lightgreen;
+    border-radius: 10px;
+    width: 600px;
+    height: 800px;
+    align-self: center;
+    
+  
+}
+
+
+.button {
+    background-color: #ed1a87;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 16px;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: auto;
+    width: 120px;
+}
+
+.button:hover {
+    background-color: blue;
+    color: white;
+    padding-right: 10px;
+}
+</style>
+
+<script>
+
+function myTaxesCalc() {
+    myHourlyPay = parseFloat(document.getElementById("HourlyPayId").value)
+    myHoursWorked = parseFloat(document.getElementById("HoursWorkedId").value)
+    myTaxes = parseFloat(document.getElementById("TaxesId").value)
+    myGrossPay = myHourlyPay * myHoursWorked
+    myNetPay = myGrossPay - (myGrossPay * (myTaxes/100))
+    myMonthlyPay = myNetPay * 4
+    myYearlyPay = myNetPay * 52
+    document.getElementById("myDiv03").innerHTML = "Your gross pay is $" + myGrossPay.toFixed(2) + " and your net pay is $" + myNetPay.toFixed(2) + '<br>Assuming you work on a weekly cheque your monthly pay with taxes is: ' + myMonthlyPay.toFixed(2) + '<br>Assuming you work on a weekly cheque your yearly pay with taxes is: ' + myYearlyPay.toFixed(2)
+}
+
+
+</script>
+
+<body>
+<div class="myDiv01">
+
+    <h1>Pay Calculator</h1>
+    Pay:<input type="text" id="HourlyPayId" value="15" style="align-self: auto;" placeholder="Hourly Pay"><br>
+    Hours:<input type="text" id="HoursWorkedId" value="8" tyle="align-self: auto;" placeholder="Hours Worked"><br>
+    Tax:<input type="text" id="TaxesId" value="30" tyle="align-self: auto;" placeholder="Taxes"><br>
+    <input class="button" type="button" value="Calculate" onclick="myTaxesCalc()">
+    <div id="myDiv03">...</div>
+
+</div>
+</body>

@@ -16,13 +16,8 @@ body {
     background-size: 100% 100%
 }
 
-#bg {
-    background-image: url('https://c4.wallpaperflare.com/wallpaper/946/600/987/windows-smooth-transition-wallpaper-preview.jpg');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: 100% 100%
-    animation: bgshiftleft 5s linear infinite;
-}
+
+
 
 
 .button {
@@ -96,6 +91,17 @@ function myFunClass() {
     
 }
 
+//capitalizes the first letter after a period
+
+function lets_see_what_happens() {
+    var myString = document.getElementById('words').value;
+    var myArray = myString.split('. ');
+    var myNewString = '';
+    for (var i = 0; i < myArray.length; i++) {
+        myNewString += myArray[i].charAt(0).toUpperCase() + myArray[i].slice(1) + '. ';
+    }
+    document.getElementById('myDiv03').innerHTML = myNewString;
+}
 
     
 
