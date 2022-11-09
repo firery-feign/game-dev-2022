@@ -1,0 +1,88 @@
+<style>
+
+body {
+    background-image: url("https://i.pinimg.com/originals/3a/61/14/3a6114335e3ed586fb197ba602dff901.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.container {
+    width: 500px;
+    height: 1000px;
+    margin: auto;
+    background-color:aquamarine;
+    border: 3px solid black;
+    border-radius: 8px;
+}
+
+</style>
+
+<script>
+
+class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+    myShow(){    
+       document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName+'<br>'
+    }
+}  // end class myAnimal
+
+
+
+
+</script>
+
+<body>
+
+    Version 0.0.1-1
+    <div class="container">
+        <h2 align=center>t2a04-extend-class-by-fred.html</h2>
+
+        Extending a pre-existing Class<br>
+
+        <h4> Example Class extend code</h4>
+        <pre>
+
+        class myCat extends myAnimal {                                                                      
+            myShow(){
+            document.getElementById('myDiv01').innerHTML = this.myName
+            }                                                                   
+        }
+
+        </pre>
+
+
+        <h4> Example working Classes code</h4>
+
+        <input type=button value="Example Class Set and Show Class Animal" onClick="{
+
+        myDog = new myAnimal('Snickers', 5)
+        myDog.myShow()  
+
+        }">
+
+        <h4> Example extending Class code</h4>
+        Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
+
+        <input type=button value="Example Extend Class Animal" onClick="{
+
+        class myCat extends myAnimal {                                                                      
+            myShow(){
+            document.getElementById('myDiv01').innerHTML = this.myName + ' is a great cat<br>'
+            }                                                                   
+        }    // end extended class myCat
+                                                                                                                                                                                                                                                                                                                                            
+        myPet = new myCat('Fluffy', 14)
+        myPet.myShow()  
+
+        }">
+
+        <div id="myDiv01">...</div>
+
+</div>
+
+
+</body>
