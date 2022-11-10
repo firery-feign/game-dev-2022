@@ -11,7 +11,7 @@ body {
     width: 500px;
     height: 1000px;
     margin: auto;
-    background-color:aquamarine;
+    background-color: lightcyan;
     border: 3px solid black;
     border-radius: 8px;
 }
@@ -29,6 +29,69 @@ class myAnimal {
        document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName+'<br>'
     }
 }  // end class myAnimal
+
+
+
+class mathClass {
+    constructor(number1, operator1, number2, operator2, number3, operator3, number4) {
+        this.myNumber1 = number1;
+        this.myOperator1 = operator1;
+        this.myNumber2 = number2;
+        this.myOperator2 = operator2;
+        this.myNumber3 = number3;
+        this.myOperator3 = operator3;
+        this.myNumber4 = number4;
+    }
+    myMath() {
+        if (this.myOperator1 == '+') {
+            this.myResult1 = this.myNumber1 + this.myNumber2;
+        } else if (this.myOperator1 == '-') {
+            this.myResult1 = this.myNumber1 - this.myNumber2;
+        } else if (this.myOperator1 == '*') {
+            this.myResult1 = this.myNumber1 * this.myNumber2;
+        } else if (this.myOperator1 == '/') {
+            this.myResult1 = this.myNumber1 / this.myNumber2;
+        } else {
+            this.myResult1 = 'Error';
+        }
+        if (this.myOperator2 == '+') {
+            this.myResult2 = this.myResult1 + this.myNumber3;
+        } else if (this.myOperator2 == '-') {
+            this.myResult2 = this.myResult1 - this.myNumber3;
+        } else if (this.myOperator2 == '*') {
+            this.myResult2 = this.myResult1 * this.myNumber3;
+        } else if (this.myOperator2 == '/') {
+            this.myResult2 = this.myResult1 / this.myNumber3;
+        } else {
+            this.myResult2 = 'Error';
+        }
+        if (this.myOperator3 == '+') {
+            this.myResult3 = this.myResult2 + this.myNumber4;
+        } else if (this.myOperator3 == '-') {
+            this.myResult3 = this.myResult2 - this.myNumber4;
+        } else if (this.myOperator3 == '*') {
+            this.myResult3 = this.myResult2 * this.myNumber4;
+        } else if (this.myOperator3 == '/') {
+            this.myResult3 = this.myResult2 / this.myNumber4;
+        } else {
+            this.myResult3 = 'Error';
+        }
+        document.getElementById('myDiv02').innerHTML = 'The result is: ' + this.myResult3;
+    }
+}
+
+function mathFun() {
+    var myNumber1 = parseFloat(document.getElementById('myNum1').value)
+    var myOperator1 = document.getElementById('myOp1').value
+    var myNumber2 = parseFloat(document.getElementById('myNum2').value)
+    var myOperator2 = document.getElementById('myOp2').value
+    var myNumber3 = parseFloat(document.getElementById('myNum3').value)
+    var myOperator3 = document.getElementById('myOp3').value
+    var myNumber4 = parseFloat(document.getElementById('myNum4').value)
+
+    var myMath = new mathClass(myNumber1, myOperator1, myNumber2, myOperator2, myNumber3, myOperator3, myNumber4);
+    myMath.myMath();
+}
 
 
 
@@ -65,9 +128,13 @@ class myAnimal {
         }">
 
         <h4> Example extending Class code</h4>
-        Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
+        Name: <input type=text id="myText01" value="Furby"><br>
+        
 
         <input type=button value="Example Extend Class Animal" onClick="{
+
+            myCatName = document.getElementById('myText01').value
+            
 
         class myCat extends myAnimal {                                                                      
             myShow(){
@@ -75,12 +142,45 @@ class myAnimal {
             }                                                                   
         }    // end extended class myCat
                                                                                                                                                                                                                                                                                                                                             
-        myPet = new myCat('Fluffy', 14)
+        myPet = new myCat(myCatName, 14)
         myPet.myShow()  
 
         }">
 
-        <div id="myDiv01">...</div>
+        <div id="myDiv01">...</div><br>
+
+        <h4>Math with extended classes</h4>
+
+        <input type="text" id="myNum1" value="1"><br>
+        <input type="text" id="myOp1" value="+"><br>
+        <input type="text" id="myNum2" value="2"><br>
+        <input type="text" id="myOp2" value="+"><br>
+        <input type="text" id="myNum3" value="3"><br>
+        <input type="text" id="myOp3" value="+"><br>
+        <input type="text" id="myNum4" value="4"><br>
+        <input type="button" value="Calculate" onClick="{mathFun()}"><br><br>
+
+        
+
+        This Extend class only adds but still works<br>
+        <input type="button" value="Extended Class" onClick="{
+            class myExMath extends mathClass {
+                myMath() {
+                    this.myResult1 = this.myNumber1 + this.myNumber2;
+                    this.myResult2 = this.myResult1 + this.myNumber3;
+                    this.myResult3 = this.myResult2 + this.myNumber4;
+                    document.getElementById('myDiv02').innerHTML = 'The result is: ' + this.myResult3;
+                }
+
+            }
+
+            myextMath = new myExMath(1, '+', 2, '+', 3, '+', 4);
+            myextMath.myMath();
+        }">
+        <div id="myDiv02"></div><br><Br>
+
+
+
 
 </div>
 
