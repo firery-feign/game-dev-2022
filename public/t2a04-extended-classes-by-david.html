@@ -174,7 +174,12 @@ function mathFun() {
 
             }
 
-            myextMath = new myExMath(1, '+', 2, '+', 3, '+', 4);
+            num1 = parseFloat(document.getElementById('myNum1').value)
+            num2 = parseFloat(document.getElementById('myNum2').value)
+            num3 = parseFloat(document.getElementById('myNum3').value)
+            num4 = parseFloat(document.getElementById('myNum4').value)
+
+            myextMath = new myExMath(num1, '+', num2, '+', num3, '+', num4);
             myextMath.myMath();
         }">
         <div id="myDiv02"></div><br><Br>
