@@ -1,5 +1,21 @@
 <style>
+ body {
+    background-image: url('https://c.files.bbci.co.uk/111FF/production/_90934107_mediaitem90934106.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+ }
 
+ .mydiv {
+    width: 600px;
+    height: 800px;
+    align-self: center;
+    margin: auto;
+    position: relative;
+    background-color: lightcyan;
+    border: 3px solid black;
+    border-radius: 8px;
+ }
 </style>
 
 <script>
@@ -28,25 +44,49 @@
     document.getElementById('myArea03').value = myString.join('')
 
     }
+
+
+    // base64 encoded text is in the text box below
+    var base64 = "SGVsbG8gV29ybGQhlHsi====S1297ajYl-KmeO07fjL";
+    // decode the base64 encoded text
+    var text = atob(base64);
+    // display the decoded text
+    document.write(text);
+    function encode64() {
+        var text = document.getElementById("myArea01").value;
+        var base64 = btoa(text);
+        document.getElementById("myArea02").value = base64;
+    }
+    function decode64() {
+        // get the base64 encoded text
+        var base64 = document.getElementById("myArea02").value;
+        // decode the base64 encoded text
+        var text = atob(base64);
+        // display the decoded text in a div element with id="result"
+        document.getElementById("myArea03").value = text;
+    }
 </script>
 
 
 
 <body>
-    <textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
+    <div class="mydiv">
+        <textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
 
 
-    <input type=button value="encrypt" onclick="{encode()}"><br><br>
+        <input type=button value="encrypt" onclick="{encode()}">
+        <input type="button" value="Base 64" onclick="encode64()" /><br><br>
 
 
 
-    <textarea id="myArea02" rows=4 cols=70></textarea><br> 
+        <textarea id="myArea02" rows=4 cols=70></textarea><br> 
 
-    <input type=button value="decrypt" onclick="{decode()}"><br><br>
+        <input type=button value="decrypt" onclick="{decode()}">
+        <input type="button" value="Base 64" onclick="decode64()" /><br><br>
+
+        <textarea id="myArea03" rows=4 cols=70></textarea><br> <br><br>
 
 
-    <textarea id="myArea03" rows=4 cols=70></textarea><br> <br><br>
+    </div>
 
-
-    
 </body>
