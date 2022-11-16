@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Run Debug",
-            "file": "c:\\Users\\onesh\\game-dev-2022-1\\public\\t2a11-g-template.html",
+            "file": "c:\\Users\\onesh\\game-dev-2022-1\\public\\index.html",
         }
     ]
 }

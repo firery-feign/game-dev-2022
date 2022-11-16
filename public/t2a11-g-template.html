@@ -7,6 +7,42 @@
     let myClock
  
  
+  //Some special shit for a keypress register
+  
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key == 'd') {
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+      myCheckHit()     // checks for all collisions
+      console.log("d")
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key == 'w') {
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+      myCheckHit()     // checks for all collisions
+      console.log("w")
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key == 'a') {
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+      myCheckHit()     // checks for all collisions
+      console.log("a")
+    }
+  });
+
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key == 's') {
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+      myCheckHit()     // checks for all collisions
+      console.log("s")
+    }
+  });
+
     // global functions here
  function myHitOther(my1,my2){
     left1   = parseInt(document.getElementById(my1).style.left)
@@ -23,6 +59,7 @@
         (top1    <=  bottom2) ){
         return true
     }
+    console.log("left1:", left1, "right1:", right1, "top1:", top1, "bottom1:", bottom1, "left2:", left2, "right2:", right2, "top2:", top2, "bottom2:", bottom2)
  }
  
  
@@ -40,11 +77,11 @@
  }  // end of myCheckHit()
  
  
- </script>
+</script>
 
 
 
-<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="amz-ent.jpg">
+<body id="myBody" style="background-repeat:repeat-x; background-size: 80%" background="amz-ent.jpg">
 
 <h1 align=center>t2a11 Game Template by Fred</h1>
 <br><br><br><br>
@@ -66,7 +103,7 @@
 }">
 
 
-<input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+<input type=button value="Image Right Fast Button"  onclick="{
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }"><br><br>
