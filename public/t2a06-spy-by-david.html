@@ -181,6 +181,7 @@
         if (myString[myLoop] == '\'') {myTemp  = ' '}
         if (myString[myLoop] == ';') {myTemp  = '"'}
         if (myString[myLoop] == 'I') {myTemp  = ';'}
+        if (myString[myLoop] == 'H') {myTemp  = '\''}
         myString[myLoop] = myTemp
     }
     document.getElementById('myArea03').value = myString.join('')
@@ -214,7 +215,6 @@
 <body>
     <div class="mydiv">
         <textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
-
 
         <input type=button value="encrypt" onclick="{encode()}">
         <input type="button" value="Base 64" onclick="encode64()" /><br><br>
