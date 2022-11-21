@@ -1,0 +1,143 @@
+<style>
+
+
+    
+
+
+    body {
+    background-color: lightcyan;
+    color: #ffffff;
+    overflow: hidden;
+    }
+    #bg {
+
+        background-image: url("mainMenuBg.png");
+        background-repeat: repeat-x;
+        background-size: 100% 100%;
+        animation: bgScrollLeft 20s linear infinite;
+        overflow: hidden;
+        position: relative;
+        right: 0px;
+        animation-play-state: var(--Animation);
+    }
+
+
+
+
+    root{
+      --scrollWidth: 100px;
+      --backgroundHeight: 100px;
+      --backgroundWidth: 100px;
+      --platformwidth: 1px;
+      --platformheight: 1px;
+      --groundh:1px;
+      --groundw:1px;
+      --Animation: 'running';
+      --groundSpeed: 15s;
+      --bgSpeed: 20s;
+    }
+
+  
+
+    .ground {
+      background-image: url("ground_platform_dirt.png");
+      width: var(--groundw);
+      height: var(--groundh);
+      animation: bgScrollLeft 15s linear infinite;
+      background-repeat: repeat-x;
+      position: absolute;
+      bottom: 0;
+      left: -9px;
+      z-index: 8;
+      background-size: 80%;
+      animation-play-state: var(--Animation);
+      overflow:hidden
+      
+    }
+
+
+    
+  @keyframes bgScrollLeft {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: var(--scrollWidth) 0;
+    }
+  }
+
+  .background {
+    height: var(--backgroundHeight);
+    width: var(--backgroundWidth);
+    overflow: hidden;
+    z-index:1;
+    position: relative;
+    background-image: url("mainMenuBg.png");
+    background-repeat: repeat-x;
+    background-size: 100% 100%;
+    animation: bgScrollLeft 20s linear infinite; 
+    animation-play-state: var(--Animation);
+    right: 0px;
+    
+    
+  }
+
+  .myMenuBackground {
+    background-color: lightcyan;
+    height: 800px;
+    width: 600px;
+    margin: auto;
+    align-self: center;
+    position: relative;
+    border: 5px solid lightgreen;
+    border-radius: 8px;
+    z-index: 20;
+  }
+
+  
+</style>
+
+<script>
+
+
+  function backgroundFun() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var fw = parseInt(w) * -2;
+    var gh = parseFloat(h) * 0.15;
+    var gw = parseFloat(w) + 30;
+    console.log(gh);
+    document.documentElement.style
+      .setProperty('--scrollWidth', fw + "px");
+    
+    
+    document.documentElement.style
+    .setProperty('--backgroundWidth', w + 'px')
+    document.documentElement.style
+    .setProperty('--backgroundHeight', h + 'px');
+
+    document.documentElement.style
+    .setProperty('--groundw', gw + 'px')
+
+    document.documentElement.style
+    .setProperty('--groundh', gh + 'px')
+    
+  }
+
+
+  
+ 
+
+</script>
+
+<body id="bg" class="background" onload="{backgroundFun()}">
+<h1>moving background but with css instead, which has made my life harder</h1>
+<input type="button" value="pause" onclick="{document.documentElement.style.setProperty('--Animation', 'paused')}">
+<input type="button" value="play" onclick="{document.documentElement.style.setProperty('--Animation', 'running')}">
+
+  
+
+
+<div class="ground"></div>
+
+</body>
