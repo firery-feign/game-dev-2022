@@ -13,14 +13,11 @@
 </style>
 
 <script>
-  
-  ;(function () {
-  const canvas = document.getElementById('myCanvas')
-  const ctx = canvas.getContext('2d')
 
-})()
+  //global variables
+  var myObs = [];
 
-    // global functions here
+
  function myHitOther(my1,my2){
 
     for (var i = 0; i < myObs.length; i++) {
@@ -37,33 +34,27 @@
   
   }
 
-  //creates a player and a hitbox that's then displayed to the canvas using myCanvas
-  
 
-     
-
-
- 
- 
-  
- 
- 
- 
-   // end of myCheckHit()
- 
 
  
 
 </script>
 
 
-<h1 align=center>t2a11 Game Template by David</h1>
-<h1 align="center">Use WASD to move, enter to reset</h1>
-<body id="myBody" style="background-repeat:repeat-x; background-size: 80%; background-color:lightblue;">
-  <div id="wrapper" class="wrapper">
 
-    <canvas id="myCanvas" width="1000" height="500" style="border:1px solid #000000; background-color:white;">
-    
-  </div>
+<body id="myBody" style="background-repeat:repeat-x; background-size: 80%; background-color:lightblue;">
+
+  <h1 align=center>t2a11 Game Template by David</h1>
+  <h1 align="center">Use WASD to move, enter to reset</h1>
+
+  <canvas id="myCanvas01" width="1000" height="500" style="border:1px solid #000000;"></canvas>
+  <script>
+    //global variables
+    let myCanvas=document.getElementById('myCanvas01');
+    let ctx=myCanvas.getContext('2d');
+
+  </script>
+
+
 
 </body>

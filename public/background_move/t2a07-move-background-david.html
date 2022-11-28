@@ -153,7 +153,8 @@
 
 
 <body id="bg" class="background" onload="{backgroundFun()}">
-<h1>moving background but with css instead, which has made my life harder</h1>
+<h1>moving background but with css instead, which has made my life harder.</h1>
+<h1>You have to hit the speed button for it to actually start moving for some reason</h1>
 <input type="button" value="pause" onclick="{document.documentElement.style.setProperty('--Animation', 'paused')}">
 <input type="button" value="play/reset" onclick="{document.documentElement.style.setProperty('--Animation', 'running'); document.documentElement.style.setProperty('myBGDuration', '20'); document.documentElement.style.setProperty('myGDuration', '15s');}">
 <input type="button" value="speed up" onclick="{document.documentElement.style.setProperty('--myBGDuration', '15s')}">
