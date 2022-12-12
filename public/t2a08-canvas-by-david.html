@@ -1,5 +1,9 @@
 
-
+<style>
+    body {
+        background-color: lightblue;
+    }
+</style>
 
 
 <body>
@@ -31,6 +35,15 @@
     myContext.stroke();
     }">
 
+    <input type="button" value=".arc2(110, 30, 60, 0, 12 * Math.PI)" onclick="{
+        myContext.beginPath();
+        myContext.lineWidth = 10;
+        myContext.strokeStyle = 'blue';
+        
+        myContext.arc(500, 300, 60, 0, 2 * Math.PI);
+        myContext.stroke();
+    }">
+
     <input type=button value=".fillText('Hello World', 400, 100)" onclick="{
     myContext.font = '20px Arial';
     myContext.fillText('Hello World', 400, 100);
@@ -40,6 +53,12 @@
     myContext.stroke();
     myContext.resetTransform();  
     //myContext.rotate(-60 * Math.PI / 180); 
+    }">
+
+    <input type="button" value="Click me!" onclick="{
+    myContext.beginPath();
+    myContext.font = '20px Arial';
+    myContext.fillText('Now why\'d you do that?', 500, 200);
     }">
 
     <input type=button value=".quadraticCurveTo(100,220,240,110)" onclick="{
@@ -64,6 +83,18 @@
 
     <input type=button value="clearRect(20, 20, 50, 50)" onclick="{
     myContext.clearRect(20, 20, 50, 50);
+    }">
+
+    <input type="button" value=".createPattern(myImage, 'repeat')" onclick="{
+        let myImage = new Image(100, 60);
+        myImage.src = 'canvas_createpattern.png';
+
+        myImage.onload = () => {
+            let myPattern = myContext.createPattern(myImage, 'repeat');
+            myContext.fillStyle = myPattern;
+            myContext.fillRect(0, 0, 1000, 600);
+        }
+        
     }">
 
     <input type=button value="Clear all" onclick="{
