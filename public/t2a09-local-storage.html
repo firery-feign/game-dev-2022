@@ -1,6 +1,6 @@
 <style>
    body {
-      background: linear-gradient(blue, orange, white);
+      background: linear-gradient(red, green);
       background-repeat: no-repeat;
       background-attachment: fixed;
       overflow: hidden;
@@ -20,20 +20,31 @@
 </style>
 
 
+
+
 <body onload="{
    myStorage = localStorage.getItem('myStoredText')
    myStorage2 = localStorage.getItem('myStoredText2')
+   myStorage3 = localStorage.getItem('myStoredCheckbox')
+   myStorage4 = localStorage.getItem('myStoredRange')
    if(myStorage  != null){
       document.getElementById('myText1').value = myStorage 
     }
    if(myStorage2  != null){
       document.getElementById('myText1').value = myStorage 
     }
+
+   if(myStorage3  != null){
+      document.getElementById('myCheckbox').value = myStorage
+   }
+   if(myStorage4  != null){
+      document.getElementById('myRange').value = myStorage
+   }
 }">
    <div class="wrapper">
       <h2>t2a09-local-storage-name by Fred. Instructions:</h2>
 
-      Text example: <input id="myText1" type=text size=70 value="" placeholder="Write here to store"><br>
+      Text example: <input id="myText1" type=text size=50 value="" placeholder="Write here to store"><br>
 
       <input type="button" value="Store Text" onClick="{
          localStorage.setItem('myStoredText', document.getElementById('myText1').value)
@@ -45,7 +56,7 @@
          document.getElementById('myText1').value = localStorage.getItem('myStoredText')
       }"> <br>
 
-      Input:<input type="text" id="myText2" size=70 value="" placeholder="Write something like your email or a pets name"><br>
+      Input:<input type="text" id="myText2" size=50 value="" placeholder="Write something like your email or a pets name"><br>
 
       <input type="button" value="Store Text" onClick="{
          localStorage.setItem('myStoredText2', document.getElementById('myText2').value)
@@ -58,10 +69,41 @@
       }">
 
       <div id="outputDiv">output:</div>
+
+
+      Checkbox: <input type="checkbox" id="myCheckbox"><br>
+
+      <input type="button" value="store" onclick="{localStorage.setItem('myStoredCheckbox', document.getElementById('myCheckbox').checked)
+      alert(document.getElementById('myCheckbox').checked + ' \nHas been stored')
+      document.getElementById('myCheckbox').value = false}">
+      <input type="button" value="retrieve" onclick="{document.getElementById('myCheckbox').checked = localStorage.getItem('myStoredCheckbox')}"><br>
       
+
+      slider: <input type="range" id="myRange" min="0" max="100"><br>
+      <p>Value: <span id="demo"></span></p>
+      <input type="button" value="store" onclick="{
+         localStorage.setItem('myStoredRange', document.getElementById('myRange').value)
+         alert(document.getElementById('myRange').value + ' \nHas been stored')
+      }">
+      <input type="button" value="retrieve" onclick="{
+         document.getElementById('myRange').value = localStorage.getItem('myStoredRange')
+      }">
+
+<script>
+   var slider = document.getElementById("myRange");
+   var output = document.getElementById("demo");
+   output.innerHTML = slider.value;
+
+   slider.oninput = function() {
+     output.innerHTML = this.value;
+   }
+</script>
+
+
    </div>
 
 <body onunload="{
    localstorage.setItem('myStoredText',document.getElementById('myText1').value)
    localstorage.setItem('myStoredText2',document.getElementById('myText2').value)
+   localstorage.setItem('myStoredCheckbox',document.getElementById('myCheckbox').value)
 }">   
