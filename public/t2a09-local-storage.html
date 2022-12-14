@@ -8,7 +8,7 @@
 
    .wrapper {
       width: 500px;
-      height: 600px;
+      height: 750px;
       left: 0;
       top: 0;
       position: fixed;
@@ -17,6 +17,7 @@
       background-color: lightblue;
 
    }
+
 </style>
 
 
@@ -27,6 +28,8 @@
    myStorage2 = localStorage.getItem('myStoredText2')
    myStorage3 = localStorage.getItem('myStoredCheckbox')
    myStorage4 = localStorage.getItem('myStoredRange')
+   myStorage5 = localStorage.getItem('myStoredColour1')
+   myStorage6 = localStorage.getItem('myStoredColour2')
    if(myStorage  != null){
       document.getElementById('myText1').value = myStorage 
     }
@@ -39,6 +42,12 @@
    }
    if(myStorage4  != null){
       document.getElementById('myRange').value = myStorage
+   }
+   if(myStorage5  != null){
+      document.getElementById('myColour1').value = myStorage
+   }
+   if(myStorage6  != null){
+      document.getElementById('myColour2').value = myStorage
    }
 }">
    <div class="wrapper">
@@ -87,6 +96,32 @@
       }">
       <input type="button" value="retrieve" onclick="{
          document.getElementById('myRange').value = localStorage.getItem('myStoredRange')
+      }"><br>
+
+
+      Change the Background: <input type="text" id="myColour1" size="25" value="red"><input type="text" id="myColour2" size="25" value="green"><br>
+      <h3>Choices:</h3>
+      <p>red<br>
+         green<br>
+         blue<br>
+         black<br>
+         yellow<br>
+         orange<br>
+         lightblue<br>
+         purple<br>
+         pink<br>
+         goldenrod<br>
+         white<br>
+      </p>
+      <input type="button" value="Store and change" onclick="{
+         localStorage.setItem('myStoredColour1', document.getElementById('myColour1').value);
+         localStorage.setItem('myStoredColour2', document.getElementById('myColour2').value);
+         document.body.style.background = 'linear-gradient(' + document.getElementById('myColour1').value + ',' + document.getElementById('myColour2').value + ')';
+      }">
+      <input type="button" value="Retrieve and change" onclick="{
+         document.getElementById('myColour1').value = localStorage.getItem('myStoredColour1');
+         document.getElementById('myColour2').value = localStorage.getItem('myStoredColour2');
+         document.body.style.background = 'linear-gradient(' + localStorage.getItem('myStoredColour1') + ',' + localStorage.getItem('myStoredColour2') + ')';
       }">
 
 <script>
@@ -106,4 +141,7 @@
    localstorage.setItem('myStoredText',document.getElementById('myText1').value)
    localstorage.setItem('myStoredText2',document.getElementById('myText2').value)
    localstorage.setItem('myStoredCheckbox',document.getElementById('myCheckbox').value)
+   localstorage.setItem('myStoredRange',document.getElementById('myRange').value)
+   localstorage.setItem('myStoredColour1',document.getElementById('myColour1').value)
+   localstorage.setItem('myStoredColour2',document.getElementById('myColour2').value)
 }">   

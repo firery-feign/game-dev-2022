@@ -1,0 +1,73 @@
+<style>
+    body {
+        background-color: linear-gradient(blue, orange);
+        overflow: hidden;
+        background-repeat: no-repeat;
+    }
+    .divs {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 1500px;
+        height:700px;
+        background-color: lightblue;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <div class="divs">
+        <h1 align=center>t2a12 Sort by Fred</h1>
+
+        
+
+        <input type=button value="Set Random" onclick="{
+        randomize()
+        }">
+
+        <input type=button value="Show" onclick="{
+        show()
+        }">
+
+        <input type=button value="Sort" onclick="{
+        sort()
+        }">
+
+        <div id="myDiv01"></div>
+
+        <canvas id="myCanvas" width="1000" height="500" style="border:1px solid #000000; left: 100%; top:50%;"></canvas>
+        <script>
+            // set up global variables
+            let myCanvas=document.getElementById('myCanvas');
+            let ctx=myCanvas.getContext('2d');
+
+            let myMax = 3      // 52 when working
+            let myCards = new Array(myMax)  
+
+
+            function randomize(){
+                for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
+                myCards[myLoop] = Math.floor(Math.random()*10)
+                }
+            }
+
+            function sort() {
+                let myTemp = 0
+                for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
+                    myCards[myLoop] = 0
+                }
+            }
+
+            function show() {
+                let myTemp = ''
+                for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
+                    myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>'
+                }
+                document.getElementById('myDiv01').innerHTML = myTemp
+            }
+
+
+        </script>
+    </div>
+</body>
