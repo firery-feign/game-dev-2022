@@ -36,26 +36,45 @@
 
         <div id="myDiv01"></div>
 
-        <canvas id="myCanvas" width="1000" height="500" style="border:1px solid #000000; left: 100%; top:50%;"></canvas>
+        <canvas id="myCanvas" width="1100" height="500" style="border:1px solid #000000; left: 100%; top:50%;"></canvas>
         <script>
             // set up global variables
             let myCanvas=document.getElementById('myCanvas');
             let ctx=myCanvas.getContext('2d');
 
-            var myMax = 5      // 52 when working
-            const myCards = []  
+            var myMax = 3      // 52 when working
+            const myCards = [3,8,1]  
 
 
             function randomize(){
-                for (let myLoop = 0; myLoop < myMax; myLoop++){
-                    let myTemp = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-            
-                    myCards.push(myTemp);
+                
+                myCards.splice(0,myCards.length);
+                
+                
+                // Null check
+                if (myMax == 0) {
+                    console.log(null)
                 }
+                
+                do {
+                    // Generating random number
+                    const randomNumber = Math
+                        .floor(Math.random() * 10) + 1
+                
+                    // Pushing into the array only 
+                    // if the array does not contain it
+                    if (!myCards.includes(randomNumber)) {
+                        myCards.push(randomNumber);
+                    }
+                
+                } while (myCards.length < myMax);
+                
+                // Printing the array elements
+                console.log(myCards)
             }
 
             function sort() {
-                
+                myCards.sort((a,b) => a - b)
             }
 
             function show() {
@@ -64,6 +83,13 @@
                     myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>'
                 }
                 document.getElementById('myDiv01').innerHTML = myTemp
+            }
+
+            function draw() {
+                for ( let myLoop = 0; myLoop < myMax; myLoop++) {
+                    ctx.beginPath();
+                    ctx
+                }
             }
 
 
