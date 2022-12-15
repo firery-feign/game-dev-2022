@@ -9,7 +9,7 @@
         top: 10px;
         left: 10px;
         width: 1500px;
-        height:700px;
+        height:900px;
         background-color: lightblue;
         border: 2px solid black;
         border-radius: 10px;
@@ -17,28 +17,26 @@
 </style>
 
 <body>
-    <div class="divs">
+    <div class="divs" >
         <h1 align=center>t2a12 Sort by David</h1>
 
+        <p align =center>Thanks to Joe there's no longer a randomize button so it does that at the start of the function but for the one line part, <br>it's instant but the piece of code that does it is (your array).sort((a,b) => a - b)<br></p>
         
 
-        <input type=button value="Set Random" onclick="{
-        randomize()
-        }">
 
-
-        <input type=button value="Sort But only 1 line of code" onclick="{
+        <input id="sort1" type=button value="Sort But only 1 line of code" onclick="{
         sort()
         }">
 
         
 
-        <input type=button value="Insertion Sort" onclick="{
+        <input id="sort2" type=button value="Insertion Sort" onclick="{
         insertionSort(myCards)
         }">
 
-        <input type="button" value="Bubble Sort" onclick="{
+        <input id="sort3" type="button" value="Bubble Sort" onclick="{
         bubblesort(myCards)
+
         }">
 
         <div id="myDiv01"></div>
@@ -49,47 +47,57 @@
             let myCanvas=document.getElementById('myCanvas');
             let ctx=myCanvas.getContext('2d');
 
-            var myMax = 50 
+            var myMax = 50
             const myCards = [3,8,1]  
+            running = false
 
+
+            
 
             function randomize(){
-                
-                myCards.splice(0,myCards.length);
-                
-                
-                // Null check
-                if (myMax == 0) {
-                    console.log(null)
-                }
-                
-                do {
-                    // Generating random number
-                    const randomNumber = Math
-                        .floor(Math.random() * 50) + 1
-                
-                    // Pushing into the myCards only 
-                    // if the myCards does not contain it
-                    if (!myCards.includes(randomNumber)) {
-                        myCards.push(randomNumber);
-                    }
-                
-                } while (myCards.length < myMax);
-                
-                // Printing the myCards elements
-                console.log(myCards)
 
-                draw()
-            }
+                    
+
+                    myCards.splice(0,myCards.length);
+                    
+                    
+                    // Null check
+                    if (myMax == 0) {
+                        console.log(null)
+                    }
+                    
+                    do {
+                        // Generating random number
+                        const randomNumber = Math
+                            .floor(Math.random() * 50) + 1
+                    
+                        // Pushing into the myCards only 
+                        // if the myCards does not contain it
+                        if (!myCards.includes(randomNumber)) {
+                            myCards.push(randomNumber);
+                        }
+                    
+                    } while (myCards.length < myMax);
+                    
+                    // Printing the myCards elements
+                    console.log(myCards)
+
+                    draw()
+                }
+                    
+            
 
             function sort() {
+                randomize()
                 myCards.sort((a,b) => a - b)
                 draw()
+                
             }
 
             
 
             function insertionSort(myCards) {
+                randomize()
                 let n = myCards.length;
 
                 
@@ -109,13 +117,15 @@
                         
                         draw()
                         }, i * 100)
+                        
                     }
-                
+                    
                 
             }
 
 
             function bubblesort(myCards) {
+                randomize()
                 for (let i = 0; i < myCards.length; i++) {
                     setTimeout(function(){
                     for (let j = 0; j < myCards.length; j++) {
@@ -126,6 +136,7 @@
                         }
                         draw()
                     }}, i * 100)
+                    
                 }
                 
             }
@@ -139,6 +150,8 @@
                     ctx.rect(10 + (i * 22), 10, 10, myCards[i] * 10);
                     ctx.stroke();
                 }
+                
+                
             }
 
 
