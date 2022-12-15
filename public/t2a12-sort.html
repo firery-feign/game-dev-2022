@@ -27,12 +27,18 @@
         }">
 
 
-        <input type=button value="Sort" onclick="{
+        <input type=button value="Sort But only 1 line of code" onclick="{
         sort()
         }">
 
+        
+
         <input type=button value="Insertion Sort" onclick="{
         insertionSort(myCards)
+        }">
+
+        <input type="button" value="Bubble Sort" onclick="{
+        bubblesort(myCards)
         }">
 
         <div id="myDiv01"></div>
@@ -43,7 +49,7 @@
             let myCanvas=document.getElementById('myCanvas');
             let ctx=myCanvas.getContext('2d');
 
-            var myMax = 50      // 52 when working
+            var myMax = 50 
             const myCards = [3,8,1]  
 
 
@@ -62,15 +68,15 @@
                     const randomNumber = Math
                         .floor(Math.random() * 50) + 1
                 
-                    // Pushing into the array only 
-                    // if the array does not contain it
+                    // Pushing into the myCards only 
+                    // if the myCards does not contain it
                     if (!myCards.includes(randomNumber)) {
                         myCards.push(randomNumber);
                     }
                 
                 } while (myCards.length < myMax);
                 
-                // Printing the array elements
+                // Printing the myCards elements
                 console.log(myCards)
 
                 draw()
@@ -80,6 +86,8 @@
                 myCards.sort((a,b) => a - b)
                 draw()
             }
+
+            
 
             function insertionSort(myCards) {
                 let n = myCards.length;
@@ -106,6 +114,21 @@
                 
             }
 
+
+            function bubblesort(myCards) {
+                for (let i = 0; i < myCards.length; i++) {
+                    setTimeout(function(){
+                    for (let j = 0; j < myCards.length; j++) {
+                        if (myCards[j] > myCards[j + 1]) {
+                            let temp = myCards[j];
+                            myCards[j] = myCards[j + 1];
+                            myCards[j + 1] = temp;
+                        }
+                        draw()
+                    }}, i * 100)
+                }
+                
+            }
            
 
             function draw() {

@@ -27,7 +27,7 @@
 </script>
  
 <body>
-    <div class="divs">
+    <div class="divs" onload="{mySound4.play()}">
         <h1 align='center'>T3A12-Sounds-and-events-name.html</h1>
 
 
@@ -37,11 +37,11 @@
         <input type='button' value='sound2' onClick="{
             mySound2.play()
         }">
-        <input type='button' value='sound3' onClick="{
+        
+        <input type="button" value="A beautiful poem" onclick="{
             mySound3.play()
         }">
-        <input type='button' value='sound4' onClick="{
-            mySound4.play()
-        }">
+
+        <p onmouseover="{mySound2.play()}">Hover over me!</p>
     </div>
-</body>
+</body >
