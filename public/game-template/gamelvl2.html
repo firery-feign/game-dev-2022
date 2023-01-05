@@ -1,4 +1,14 @@
 <style>
+    body { 
+        background-color: #6cd9c5;
+
+    }
+
+    .canvasBg {
+        background-image: url("mainMenuBg.png");
+        background-size: 100% 100%;
+        border: 1px solid black;
+    }
 
 </style>
 
@@ -7,5 +17,169 @@
 </script>
 
 <body>
-    
+    version: 0.0.1-7
+    By: David
+    <h1 align="center">Level 2 / Invaders.exe</h1>
+    <h3 align="center">WASD to move the mouse to aim and LMB to shoot</h3>
+    <br>
+
+    <canvas id="myCanvas" class="canvasBg" width="1000" height="600"></canvas>
+    <script>
+        //get canvas element
+        var canvas = document.getElementById("myCanvas");
+        //get canvas context
+        var ctx = canvas.getContext("2d");
+
+
+        //create player object
+        var player = {
+            x: 500,
+            y: 550,
+            width: 50,
+            height: 50,
+            speed: 10,
+            dx: 0,
+            dy: 0,
+            color: "red",
+            draw: function () {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            },
+            update: function () {
+                this.x += this.dx;
+                this.y += this.dy;
+            },
+            clear: function () {
+               ctx.clearRect(this.x, this.y, this.width, this.height);
+            }
+                
+        }
+
+        
+
+        //create enemy object
+        var enemy = {
+            x: 500,
+            y: 100,
+            width: 50,
+            height: 50,
+            speed: 10,
+            dx: 0,
+            dy: 0,
+            color: "blue",
+            draw: function () {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            },
+            update: function () {
+                this.x += this.dx;
+                this.y += this.dy;
+            },
+            clear: function () {
+                ctx.clearRect(this.x, this.y, this.width, this.height);
+            }
+            
+        }
+
+        const bulletArray = [];
+
+        //create a bullet in the array
+class Bullet {
+  constructor(x, y, radius, color, dx, dy) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.color = color;
+    this.dx = dx;
+    this.dy = dy;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
+  }
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+  }
+}
+
+//shows the bullet on the canvas
+function handleBullets() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  player.draw()
+  enemy.draw()
+  bulletArray.forEach(bullet => {
+    bullet.update();
+    bullet.draw();
+  });
+}
+
+//move the bullet upwards on the canvas
+function moveBullet() {
+  bulletArray.forEach(bullet => bullet.y -= 10);
+  handleBullets();
+  for (i = 0; i < bulletArray.length; i++) {
+    if (bulletArray[i].y < 0) {
+      bulletArray.splice(i, 1);
+    }
+  }
+}
+
+function addBullet() {
+    bulletArray.push(new Bullet(player.x, player.y, 5, "black", 0, 0));
+}
+
+setInterval(moveBullet, 25);
+
+
+
+        var loop = true
+        
+
+
+
+        //show enemy in canvas
+        enemy.draw();
+        player.draw()
+
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.keyCode == 68) {
+                player.dx = player.speed;
+                player.clear();
+                player.update();
+                canvasCollision()
+                player.draw();
+                console.log(player);
+                
+            } else if (event.keyCode == 65) {
+                player.dx = -player.speed;
+                player.clear();
+                player.update();
+                canvasCollision()
+                player.draw();
+                console.log(player);
+                
+            } else if (event.keyCode == 87) {
+                handleBullets();
+                addBullet();
+                console.log(bulletArray);
+            }
+        });
+
+        
+        function canvasCollision() {
+            if (player.x < 0) {
+                player.x = 0;
+                player.update()
+            } else if (player.x + player.width > canvas.width) {
+                player.x = canvas.width - player.width;
+                player.update()
+            }
+        }
+
+    </script>
 </body>
