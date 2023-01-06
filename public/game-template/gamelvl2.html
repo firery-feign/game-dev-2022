@@ -55,84 +55,143 @@
                 
         }
 
-        
+        const enemyArray = [];
 
-        //create enemy object
-        var enemy = {
-            x: 500,
-            y: 100,
-            width: 50,
-            height: 50,
-            speed: 10,
-            dx: 0,
-            dy: 0,
-            color: "blue",
-            draw: function () {
+        //creates an enemy in the array
+
+        class Enemy {
+            constructor(x, y, width, height, color, dx, dy) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.color = color;
+                this.dx = dx;
+                this.dy = dy;
+            }
+            draw() {
                 ctx.fillStyle = this.color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
-            },
-            update: function () {
+            }
+            update() {
                 this.x += this.dx;
                 this.y += this.dy;
-            },
-            clear: function () {
-                ctx.clearRect(this.x, this.y, this.width, this.height);
             }
-            
         }
+
+
+        //shows the enemy on the canvas
+        function handleEnemies() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            player.draw()
+            enemyArray.forEach(enemy => {
+                enemy.update();
+                enemy.draw();
+            });
+            player.draw()
+
+        }
+
+
+        //add enemy to the array
+        function addEnemy() {
+            enemyArray.push(new Enemy(500, 100, 50, 50, "blue", 0, 0));
+            handleEnemies();
+            console.log("Enemy added")
+        }
+
+        //move the enemy downwards on the canvas
+        function moveEnemy() {
+            enemyArray.forEach(enemy => enemy.y += 10);
+            handleEnemies();
+            for (i = 0; i < enemyArray.length; i++) {
+                if (enemyArray[i].y > 600) {
+                    enemyArray.splice(i, 1);
+                }
+                if (enemyArray[i].y > 525) {
+                    
+                    location.reload()
+                }
+            }
+
+            
+            console.log(enemyArray)
+        }
+        
+
+        setInterval(moveEnemy, 100);
+        setInterval(addEnemy, 2500);
 
         const bulletArray = [];
 
         //create a bullet in the array
-class Bullet {
-  constructor(x, y, radius, color, dx, dy) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
-    this.dx = dx;
-    this.dy = dy;
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.closePath();
-  }
-  update() {
-    this.x += this.dx;
-    this.y += this.dy;
-  }
-}
+        class Bullet {
+        constructor(x, y, radius, color, dx, dy) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.color = color;
+            this.dx = dx;
+            this.dy = dy;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+        update() {
+            this.x += this.dx;
+            this.y += this.dy;
+        }
+        }
 
-//shows the bullet on the canvas
-function handleBullets() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  player.draw()
-  enemy.draw()
-  bulletArray.forEach(bullet => {
-    bullet.update();
-    bullet.draw();
-  });
-}
+        //shows the bullet on the canvas
+        function handleBullets() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        player.draw()
+        handleEnemies()
+        bulletArray.forEach(bullet => {
+            bullet.update();
+            bullet.draw();
+        });
+        }
 
-//move the bullet upwards on the canvas
-function moveBullet() {
-  bulletArray.forEach(bullet => bullet.y -= 10);
-  handleBullets();
-  for (i = 0; i < bulletArray.length; i++) {
-    if (bulletArray[i].y < 0) {
-      bulletArray.splice(i, 1);
-    }
-  }
-}
+        //move the bullet upwards on the canvas
+        function moveBullet() {
+        bulletArray.forEach(bullet => bullet.y -= 10);
+        handleBullets();
+        collisionDetection()
+        for (i = 0; i < bulletArray.length; i++) {
+            if (bulletArray[i].y < 0) {
+            bulletArray.splice(i, 1);
+            }
+        }
+        }
 
-function addBullet() {
-    bulletArray.push(new Bullet(player.x, player.y, 5, "black", 0, 0));
-}
+        function addBullet() {
+            bulletArray.push(new Bullet(player.x + 25, player.y, 5, "black", 0, 0));
+        }
 
-setInterval(moveBullet, 25);
+        //collision detection
+        function collisionDetection() {
+            for (i = 0; i < bulletArray.length; i++) {
+                if (bulletArray[i].x < enemyArray[i].x + enemyArray[i].width &&
+                    bulletArray[i].x + bulletArray[i].radius > enemyArray[i].x &&
+                    bulletArray[i].y < enemyArray[i].y + enemyArray[i].height &&
+                    bulletArray[i].y + bulletArray[i].radius > enemyArray[i].y) {
+                    bulletArray.splice(i, 1);
+                    enemyArray.splice(i, 1);
+                    enemy.clear();
+                    enemy.x = 500;
+                    enemy.y = 100;
+                    enemy.draw();
+                }
+            }
+        }
+
+        setInterval(moveBullet, 25);
 
 
 
@@ -142,7 +201,7 @@ setInterval(moveBullet, 25);
 
 
         //show enemy in canvas
-        enemy.draw();
+        handleEnemies();
         player.draw()
 
         
