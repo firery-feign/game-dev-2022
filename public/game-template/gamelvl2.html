@@ -17,12 +17,12 @@
 </script>
 
 <body>
-    version: 0.0.1-7
+    version: 0.0.4-36
     By: David
     <h1 align="center">Level 2 / Invaders.exe</h1>
-    <h3 align="center">WASD to move the mouse to aim and LMB to shoot</h3>
-    <br>
-
+    <h3 align="center">"a" and "d" to move left or right, "w" to shoot</h3>
+    <p align="center">Don't let them land!</p>
+    <input type="button" onclick="{gameStart()}" value="Start Game"><br>
     <canvas id="myCanvas" class="canvasBg" width="1000" height="600"></canvas>
     <script>
         //get canvas element
@@ -30,7 +30,14 @@
         //get canvas context
         var ctx = canvas.getContext("2d");
 
+        function gameStart() {
 
+            //creates a red line across the screen at y = 550
+            ctx.beginPath();
+            ctx.fillStyle = "red";
+            ctx.fillRect(0, 550, 1000, 15);
+            ctx.closePath()
+            
         //create player object
         var player = {
             x: 500,
@@ -55,6 +62,9 @@
                 
         }
 
+
+        
+        var score = 0;
         const enemyArray = [];
 
         //creates an enemy in the array
@@ -95,31 +105,27 @@
 
         //add enemy to the array
         function addEnemy() {
-            enemyArray.push(new Enemy(500, 100, 50, 50, "blue", 0, 0));
+            const x = Math.floor(Math.random() * 950);
+            const y = 0;
+            enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0));
             handleEnemies();
-            console.log("Enemy added")
         }
 
         //move the enemy downwards on the canvas
         function moveEnemy() {
-            enemyArray.forEach(enemy => enemy.y += 10);
+            enemyArray.forEach(enemy => enemy.y += 2);
             handleEnemies();
+            collisionDetection();
             for (i = 0; i < enemyArray.length; i++) {
-                if (enemyArray[i].y > 600) {
-                    enemyArray.splice(i, 1);
-                }
-                if (enemyArray[i].y > 525) {
-                    
-                    location.reload()
+                if (enemyArray[i].y >= 550) {
+                gameOver();
+                break;
                 }
             }
-
-            
-            console.log(enemyArray)
         }
         
 
-        setInterval(moveEnemy, 100);
+        setInterval(moveEnemy, 25);
         setInterval(addEnemy, 2500);
 
         const bulletArray = [];
@@ -152,6 +158,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         player.draw()
         handleEnemies()
+        
         bulletArray.forEach(bullet => {
             bullet.update();
             bullet.draw();
@@ -160,42 +167,63 @@
 
         //move the bullet upwards on the canvas
         function moveBullet() {
-        bulletArray.forEach(bullet => bullet.y -= 10);
-        handleBullets();
-        collisionDetection()
-        for (i = 0; i < bulletArray.length; i++) {
-            if (bulletArray[i].y < 0) {
-            bulletArray.splice(i, 1);
+            bulletArray.forEach(bullet => bullet.y -= 10);
+            handleBullets();
+        
+            for (i = 0; i < bulletArray.length; i++) {
+                if (bulletArray[i].y < 0) {
+                bulletArray.splice(i, 1);
+                }
             }
-        }
         }
 
         function addBullet() {
             bulletArray.push(new Bullet(player.x + 25, player.y, 5, "black", 0, 0));
         }
 
+
+        function myScore() {
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("Score: " + score);
+        }
+
         //collision detection
         function collisionDetection() {
-            for (i = 0; i < bulletArray.length; i++) {
-                if (bulletArray[i].x < enemyArray[i].x + enemyArray[i].width &&
-                    bulletArray[i].x + bulletArray[i].radius > enemyArray[i].x &&
-                    bulletArray[i].y < enemyArray[i].y + enemyArray[i].height &&
-                    bulletArray[i].y + bulletArray[i].radius > enemyArray[i].y) {
+            for (let i = 0; i < bulletArray.length; i++) {
+                for (let j = 0; j < enemyArray.length; j++) {
+                const bullet = bulletArray[i];
+                const enemy = enemyArray[j];
+                const dx = bullet.x - enemy.x;
+                const dy = bullet.y - enemy.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < bullet.radius + enemy.width) {
                     bulletArray.splice(i, 1);
-                    enemyArray.splice(i, 1);
-                    enemy.clear();
-                    enemy.x = 500;
-                    enemy.y = 100;
-                    enemy.draw();
+                    enemyArray.splice(j, 1);
+                    i--;
+                    j--;
+                    score += 1;
+                    myScore();
+                }
+                }
+            }
+            for (let j = 0; j < enemyArray.length; j++) {
+                const enemy = enemyArray[j];
+                const dx = player.x - enemy.x;
+                const dy = player.y - enemy.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    
+                    enemyArray.splice(j, 1);
+                    j--;
                 }
             }
         }
 
         setInterval(moveBullet, 25);
-
-
-
-        var loop = true
         
 
 
@@ -204,7 +232,7 @@
         handleEnemies();
         player.draw()
 
-        
+
         document.addEventListener("keydown", function (event) {
             if (event.keyCode == 68) {
                 player.dx = player.speed;
@@ -228,7 +256,7 @@
                 console.log(bulletArray);
             }
         });
-
+        
         
         function canvasCollision() {
             if (player.x < 0) {
@@ -240,5 +268,42 @@
             }
         }
 
+
+        function gameOver() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Set the fill style to red
+            ctx.fillStyle = "red";
+
+            // Set the font and text align
+            ctx.font = "48px sans-serif";
+            ctx.textAlign = "center";
+
+            // Display the "Game Over" text
+            ctx.fillText("Game Over, press space to restart.", canvas.width / 2, canvas.height / 2);
+
+            // Clear all intervals
+            for (let i = 1; i < 99999; i++) {
+                window.clearInterval(i);
+            }
+
+            // Remove all event listeners
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("keyup", handleKeyUp);
+
+            // Add an event listener for the space bar
+            window.addEventListener("keydown", event => {
+                if (event.code === "Space") {
+                // Refresh the page
+                window.location.reload();
+                }
+            });
+        }
+
+
+    }
+
+        
     </script>
 </body>
