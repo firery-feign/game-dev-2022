@@ -66,11 +66,12 @@
                 
                 
                 const enemyArray = [];
+                let enemyType = "default"
 
                 //creates an enemy in the array
 
                 class Enemy {
-                    constructor(x, y, width, height, color, dx, dy, movepath, speed) {
+                    constructor(x, y, width, height, color, dx, dy, movepath, speed, enemyType) {
                         this.x = x;
                         this.y = y;
                         this.width = width;
@@ -80,6 +81,7 @@
                         this.dy = dy;
                         this.pathloc = movepath;
                         this.speed = speed;
+                        this.type = enemyType
                     }
                     draw() {
                         ctx.fillStyle = this.color;
@@ -110,7 +112,7 @@
                 function addEnemy() {
                     const x = 950;
                     const y = 0;
-                    enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2));
+                    enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2, "default"));
                     handleEnemies();
                 }
 
@@ -311,7 +313,7 @@
                 }
 
                 function addBullet() {
-                    bulletArray.push(new Bullet(player.x + 25, player.y, 7, 12, "bullet.png", 0, 0));
+                    bulletArray.push(new Bullet(player.x + 25, player.y, 7, 12, "Bullet.png", 0, 0));
 
                 }
 
@@ -398,7 +400,7 @@
                         canShoot = false;
                         setTimeout(() => {
                             canShoot = true;
-                        }   , 250);
+                        }   , 500);
                     }
                 });
                 
