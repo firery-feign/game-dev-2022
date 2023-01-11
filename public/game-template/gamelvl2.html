@@ -348,17 +348,7 @@
                         }
                         }
                     }
-                    for (let j = 0; j < enemyArray.length; j++) {
-                        const enemy = enemyArray[j];
-                        const dx = player.x - enemy.x;
-                        const dy = player.y - enemy.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 100) {
-                            
-                            enemyArray.splice(j, 1);
-                            j--;
-                        }
-                    }
+                    
                 }
 
                 setInterval(moveBullet, 25);
