@@ -30,278 +30,426 @@
         //get canvas context
         var ctx = canvas.getContext("2d");
 
+        let gameRunning = true
+        
+
         function gameStart() {
-
-            //creates a red line across the screen at y = 550
-            ctx.beginPath();
-            ctx.fillStyle = "red";
-            ctx.fillRect(0, 550, 1000, 15);
-            ctx.closePath()
-            
-        //create player object
-        var player = {
-            x: 500,
-            y: 550,
-            width: 50,
-            height: 50,
-            speed: 10,
-            dx: 0,
-            dy: 0,
-            color: "red",
-            draw: function () {
-                ctx.fillStyle = this.color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-            },
-            update: function () {
-                this.x += this.dx;
-                this.y += this.dy;
-            },
-            clear: function () {
-               ctx.clearRect(this.x, this.y, this.width, this.height);
-            }
-                
-        }
-
-
-        
-        var score = 0;
-        const enemyArray = [];
-
-        //creates an enemy in the array
-
-        class Enemy {
-            constructor(x, y, width, height, color, dx, dy) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;
-                this.color = color;
-                this.dx = dx;
-                this.dy = dy;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-            }
-            update() {
-                this.x += this.dx;
-                this.y += this.dy;
-            }
-        }
-
-
-        //shows the enemy on the canvas
-        function handleEnemies() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            player.draw()
-            enemyArray.forEach(enemy => {
-                enemy.update();
-                enemy.draw();
-            });
-            player.draw()
-
-        }
-
-
-        //add enemy to the array
-        function addEnemy() {
-            const x = Math.floor(Math.random() * 950);
-            const y = 0;
-            enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0));
-            handleEnemies();
-        }
-
-        //move the enemy downwards on the canvas
-        function moveEnemy() {
-            enemyArray.forEach(enemy => enemy.y += 2);
-            handleEnemies();
-            collisionDetection();
-            for (i = 0; i < enemyArray.length; i++) {
-                if (enemyArray[i].y >= 550) {
-                gameOver();
-                break;
-                }
-            }
-        }
-        
-
-        setInterval(moveEnemy, 25);
-        setInterval(addEnemy, 2500);
-
-        const bulletArray = [];
-
-        //create a bullet in the array
-        class Bullet {
-        constructor(x, y, radius, color, dx, dy) {
-            this.x = x;
-            this.y = y;
-            this.radius = radius;
-            this.color = color;
-            this.dx = dx;
-            this.dy = dy;
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-            ctx.closePath();
-        }
-        update() {
-            this.x += this.dx;
-            this.y += this.dy;
-        }
-        }
-
-        //shows the bullet on the canvas
-        function handleBullets() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        player.draw()
-        handleEnemies()
-        
-        bulletArray.forEach(bullet => {
-            bullet.update();
-            bullet.draw();
-        });
-        }
-
-        //move the bullet upwards on the canvas
-        function moveBullet() {
-            bulletArray.forEach(bullet => bullet.y -= 10);
-            handleBullets();
-        
-            for (i = 0; i < bulletArray.length; i++) {
-                if (bulletArray[i].y < 0) {
-                bulletArray.splice(i, 1);
-                }
-            }
-        }
-
-        function addBullet() {
-            bulletArray.push(new Bullet(player.x + 25, player.y, 5, "black", 0, 0));
-        }
-
-
-        function myScore() {
-            ctx.clearRect(0,0,canvas.width,canvas.height)
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "black";
-            ctx.fillText("Score: " + score);
-        }
-
-        //collision detection
-        function collisionDetection() {
-            for (let i = 0; i < bulletArray.length; i++) {
-                for (let j = 0; j < enemyArray.length; j++) {
-                const bullet = bulletArray[i];
-                const enemy = enemyArray[j];
-                const dx = bullet.x - enemy.x;
-                const dy = bullet.y - enemy.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < bullet.radius + enemy.width) {
-                    bulletArray.splice(i, 1);
-                    enemyArray.splice(j, 1);
-                    i--;
-                    j--;
-                    score += 1;
-                    myScore();
-                }
-                }
-            }
-            for (let j = 0; j < enemyArray.length; j++) {
-                const enemy = enemyArray[j];
-                const dx = player.x - enemy.x;
-                const dy = player.y - enemy.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 100) {
+            if (gameRunning == true) {
                     
-                    enemyArray.splice(j, 1);
-                    j--;
+                //create player class
+                var player = {
+                    x: 500,
+                    y: 550,
+                    width: 50,
+                    height: 50,
+                    speed: 10,
+                    dx: 0,
+                    dy: 0,
+                    img: "PlayerModel.png",
+                    
+                    draw: function () {
+                        var playerImg = new Image();
+                        playerImg.src = this.img;
+                        ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
+                    },
+                    update: function () {
+                        this.x += this.dx;
+                        this.y += this.dy;
+                    },
+                    clear: function () {
+                    ctx.clearRect(this.x, this.y, this.width, this.height);
+                    }
+                        
                 }
-            }
-        }
-
-        setInterval(moveBullet, 25);
-        
-
-
-
-        //show enemy in canvas
-        handleEnemies();
-        player.draw()
-
-
-        document.addEventListener("keydown", function (event) {
-            if (event.keyCode == 68) {
-                player.dx = player.speed;
-                player.clear();
-                player.update();
-                canvasCollision()
-                player.draw();
-                console.log(player);
                 
-            } else if (event.keyCode == 65) {
-                player.dx = -player.speed;
-                player.clear();
-                player.update();
-                canvasCollision()
-                player.draw();
-                console.log(player);
+
                 
-            } else if (event.keyCode == 87) {
-                handleBullets();
-                addBullet();
-                console.log(bulletArray);
-            }
-        });
-        
-        
-        function canvasCollision() {
-            if (player.x < 0) {
-                player.x = 0;
-                player.update()
-            } else if (player.x + player.width > canvas.width) {
-                player.x = canvas.width - player.width;
-                player.update()
-            }
-        }
+                
+                const enemyArray = [];
 
+                //creates an enemy in the array
 
-        function gameOver() {
-            // Clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Set the fill style to red
-            ctx.fillStyle = "red";
-
-            // Set the font and text align
-            ctx.font = "48px sans-serif";
-            ctx.textAlign = "center";
-
-            // Display the "Game Over" text
-            ctx.fillText("Game Over, press space to restart.", canvas.width / 2, canvas.height / 2);
-
-            // Clear all intervals
-            for (let i = 1; i < 99999; i++) {
-                window.clearInterval(i);
-            }
-
-            // Remove all event listeners
-            window.removeEventListener("keydown", handleKeyDown);
-            window.removeEventListener("keyup", handleKeyUp);
-
-            // Add an event listener for the space bar
-            window.addEventListener("keydown", event => {
-                if (event.code === "Space") {
-                // Refresh the page
-                window.location.reload();
+                class Enemy {
+                    constructor(x, y, width, height, color, dx, dy, movepath, speed) {
+                        this.x = x;
+                        this.y = y;
+                        this.width = width;
+                        this.height = height;
+                        this.color = color;
+                        this.dx = dx;
+                        this.dy = dy;
+                        this.pathloc = movepath;
+                        this.speed = speed;
+                    }
+                    draw() {
+                        ctx.fillStyle = this.color;
+                        ctx.fillRect(this.x -25, this.y - 25, this.width, this.height);
+                    }
+                    update() {
+                        this.x += this.dx;
+                        this.y += this.dy;
+                    }
                 }
-            });
-        }
 
 
+                //shows the enemy on the canvas
+                function handleEnemies() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    player.draw()
+                    enemyArray.forEach(enemy => {
+                        enemy.update();
+                        enemy.draw();
+                    });
+                    player.draw()
+                    myScore()
+
+                }
+
+
+                //add enemy to the array
+                function addEnemy() {
+                    const x = 950;
+                    const y = 0;
+                    enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2));
+                    handleEnemies();
+                }
+
+                //move the enemy downwards on the canvas
+                function moveEnemy() {
+                    handleEnemies();
+                    collisionDetection();
+                    for (i = 0; i < enemyArray.length; i++) {
+                        if (enemyArray[i].y >= 550) {
+                            gameOver();
+                            break;
+                        }
+
+                        switch(enemyArray[i].pathloc) {
+
+                        
+                        case 1: 
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 1 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 75) {
+                                enemyArray[i].pathloc = 2;
+                            }
+                            break;
+                        
+                        case 2: 
+                            enemyArray[i].x -= 2;
+                            console.log("enemy array num: " + i + ", step 1 x: " + enemyArray[i].x);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].x <= 25) {
+                                enemyArray[i].pathloc = 3;
+                            }
+                            break;
+                        
+                        
+                        case 3:
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 2 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 150) {
+                                enemyArray[i].pathloc = 4;
+                            }
+                            break;
+                        
+                        case 4 :
+                            enemyArray[i].x += 2;
+                            console.log("enemy array num: " + i + ", step 2 x: " + enemyArray[i].x);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                                if (enemyArray[i].x >= 950) {
+                                    enemyArray[i].pathloc = 5;
+                                }
+                            break;
+                        
+                        case 5:
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 3 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 225) {
+                                enemyArray[i].pathloc = 6;
+                            }
+                            break;
+                        
+                        case 6:
+                            enemyArray[i].x -= 2;
+                            console.log("enemy array num: " + i + ", step 3 x: " + enemyArray[i].x);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].x <= 25) {
+                                enemyArray[i].pathloc = 7;
+                            }
+                            break;
+                        
+                        case 7: 
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 4 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 300) {
+                                enemyArray[i].pathloc = 8;
+                            }
+                            break;
+                        
+                        case 8:
+                            enemyArray[i].x += 2;
+                            console.log("enemy array num: " + i + ", step 4 x: " + enemyArray[i].x);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].x >= 950) {
+                                enemyArray[i].pathloc = 9;
+                            }
+                            break;
+                        
+                        case 9:
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 5 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 375) {
+                                enemyArray[i].pathloc = 10;
+                            }
+                            break;
+                        
+                        case 10:
+                            enemyArray[i].x -= 2;
+                            console.log("enemy array num: " + i + ", step 5 x: " + enemyArray[i].x);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].x <= 25) {
+                                enemyArray[i].pathloc = 11;
+                            }
+                            break;
+                        
+                        case 11: 
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 6 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 450) {
+                                enemyArray[i].pathloc = 12;
+                            }
+                            break;
+                        
+                        case 12:
+                            enemyArray[i].x += 2;
+                            console.log("enemy array num: " + i + ", step 6 x: " + enemyArray[i].x);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].x >= 950) {
+                                enemyArray[i].pathloc = 13;
+                            }
+                            break;
+                        
+                        case 13:
+                            enemyArray[i].y += 2;
+                            console.log("enemy array num: " + i + ", step 7 y: " + enemyArray[i].y);
+                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
+                            if (enemyArray[i].y >= 600) {
+                                enemyArray[i].pathloc = 14;
+                            }
+                            break;
+                        }
+                        myScore()
+
+                    }
+                        
+                }
+                
+
+                setInterval(moveEnemy, 25);
+                setInterval(addEnemy, 2500);
+
+                const bulletArray = [];
+
+                //create a bullet in the array
+                class Bullet {
+                    constructor(x, y, width, height, imgSrc, dx, dy) {
+                        this.x = x;
+                        this.y = y;
+                        this.width = width;
+                        this.height = height;
+                        this.img = new Image();
+                        this.img.src = imgSrc;
+                        this.dx = dx;
+                        this.dy = dy;
+                        this.img.onload = function(){
+                        handleBullets();
+                        }
+                    }
+                    draw() {
+                        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+                    }
+                    update() {
+                        this.x += this.dx;
+                        this.y += this.dy;
+                    }
+                }
+
+
+
+
+
+                //shows the bullet on the canvas
+                function handleBullets() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                player.draw()
+                handleEnemies()
+                
+                bulletArray.forEach(bullet => {
+                    bullet.update();
+                    bullet.draw();
+                });
+                }
+
+                //move the bullet upwards on the canvas
+                function moveBullet() {
+                    bulletArray.forEach(bullet => bullet.y -= 10);
+                    handleBullets();
+                
+                    for (i = 0; i < bulletArray.length; i++) {
+                        if (bulletArray[i].y < 0) {
+                        bulletArray.splice(i, 1);
+                        }
+                        myScore();
+                    }
+                }
+
+                function addBullet() {
+                    bulletArray.push(new Bullet(player.x + 25, player.y, 7, 12, "bullet.png", 0, 0));
+
+                }
+
+
+                let score = 0;
+
+                //creates a score counter
+                function myScore() {
+                    ctx.font = "30px Arial";
+                    ctx.fillStyle = "black";
+                    ctx.fillText("Score: " + score, 20, 30);
+                }
+
+                //collision detection
+                function collisionDetection() {
+                    for (let i = 0; i < bulletArray.length; i++) {
+                        for (let j = 0; j < enemyArray.length; j++) {
+                        const bullet = bulletArray[i];
+                        const enemy = enemyArray[j];
+                        const dx = bullet.x - enemy.x;
+                        const dy = bullet.y - enemy.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        console.log(distance)
+                        if (distance < 30) {
+                            console.log(bulletArray[i])
+                            bulletArray.splice(i, 1);
+                            enemyArray.splice(j, 1);
+                            i--;
+                            j--;
+                            score += 1;
+                            myScore();
+                        }
+                        }
+                    }
+                    for (let j = 0; j < enemyArray.length; j++) {
+                        const enemy = enemyArray[j];
+                        const dx = player.x - enemy.x;
+                        const dy = player.y - enemy.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 100) {
+                            
+                            enemyArray.splice(j, 1);
+                            j--;
+                        }
+                    }
+                }
+
+                setInterval(moveBullet, 25);
+                
+
+
+
+                //show enemy in canvas
+                handleEnemies();
+                player.draw()
+
+                let canShoot = true
+
+
+                document.addEventListener("keydown", function (event) {
+                    if (event.keyCode == 68) {
+                        player.dx = player.speed;
+                        player.clear();
+                        player.update();
+                        canvasCollision()
+                        player.draw();
+                        console.log(player);
+                        myScore()
+                        
+                    } else if (event.keyCode == 65) {
+                        player.dx = -player.speed;
+                        player.clear();
+                        player.update();
+                        canvasCollision()
+                        player.draw();
+                        console.log(player);
+                        myScore()
+                        
+                    } else if (event.keyCode == 87 && canShoot) {
+                        handleBullets();
+                        addBullet();
+                        console.log(bulletArray);
+                        myScore()
+                        canShoot = false;
+                        setTimeout(() => {
+                            canShoot = true;
+                        }   , 250);
+                    }
+                });
+                
+                
+                function canvasCollision() {
+                    if (player.x < 0) {
+                        player.x = 0;
+                        player.update()
+                    } else if (player.x + player.width > canvas.width) {
+                        player.x = canvas.width - player.width;
+                        player.update()
+                    }
+                }
+
+
+                function gameOver() {
+                    // Clear the canvas
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Set the fill style to red
+                    ctx.fillStyle = "red";
+
+                    // Set the font and text align
+                    ctx.font = "48px sans-serif";
+                    ctx.textAlign = "center";
+
+                    // Display the "Game Over" text
+                    ctx.fillText("Game Over, press space to restart.", canvas.width / 2, canvas.height / 2);
+
+                    // Clear all intervals
+                    for (let i = 1; i < 99999; i++) {
+                        window.clearInterval(i);
+                    }
+
+                    //sets gamerunning to false
+                    gameRunning = false;
+
+                    // Remove all event listeners
+                    window.removeEventListener("keydown", handleKeyDown);
+                    window.removeEventListener("keyup", handleKeyUp);
+
+                    // Add an event listener for the space bar
+                    window.addEventListener("keydown", event => {
+                        if (event.code === "Space") {
+                        // Refresh the page
+                        window.location.reload();
+                        }
+                    });
+                }
+
+    }
     }
 
         
