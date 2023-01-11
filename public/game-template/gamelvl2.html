@@ -22,7 +22,7 @@
     <h1 align="center">Level 2 / Invaders.exe</h1>
     <h3 align="center">"a" and "d" to move left or right, "w" to shoot</h3>
     <p align="center">Don't let them land!</p>
-    <input type="button" onclick="{gameStart()}" value="Start Game"><br>
+    <input type="button" id="button01" onclick="{gameStart(); document.getElementById('button01').disabled = true}" value="Start Game"><br>
     <canvas id="myCanvas" class="canvasBg" width="1000" height="600"></canvas>
     <script>
         //get canvas element
@@ -429,14 +429,14 @@
                     gameRunning = false;
 
                     // Remove all event listeners
-                    window.removeEventListener("keydown", handleKeyDown);
-                    window.removeEventListener("keyup", handleKeyUp);
+                    document.removeEventListener("keydown");
+                    
 
                     // Add an event listener for the space bar
-                    window.addEventListener("keydown", event => {
-                        if (event.code === "Space") {
+                    document.addEventListener("keydown", function (event) {
+                        if (event.keyCode == "32") {
                         // Refresh the page
-                        window.location.reload();
+                        location.reload();
                         }
                     });
                 }
