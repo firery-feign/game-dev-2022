@@ -5,7 +5,7 @@
     }
 
     .canvasBg {
-        background-image: url("mainMenuBg.png");
+        background-image: url("space-BG.jpg");
         background-size: 100% 100%;
         border: 1px solid black;
     }
@@ -112,6 +112,25 @@
                 function addEnemy() {
                     const x = 950;
                     const y = 0;
+                    let enemyType = "default";
+                    let randEnemyGen = Math.floor(Math.random() * 3) + 1;
+                    console.log(randEnemyGen);
+
+                    //deciding which enemy to spawn
+                    switch(randEnemyGen) {
+                        case 1: 
+                            enemyType = "default";
+                            break;
+                        case 2:
+                            enemyType = "sprinter";
+                            break;
+                        case 3:
+                            enemyType = "bomber";
+                            break;
+                        
+                    }
+
+
                     enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2, "default"));
                     handleEnemies();
                 }
@@ -323,7 +342,7 @@
                 //creates a score counter
                 function myScore() {
                     ctx.font = "30px Arial";
-                    ctx.fillStyle = "black";
+                    ctx.fillStyle = "white";
                     ctx.fillText("Score: " + score, 20, 30);
                 }
 
@@ -404,6 +423,7 @@
                         player.update()
                     }
                 }
+            }
 
 
                 function gameOver() {
@@ -427,21 +447,17 @@
 
                     //sets gamerunning to false
                     gameRunning = false;
-
-                    // Remove all event listeners
-                    document.removeEventListener("keydown");
                     
 
-                    // Add an event listener for the space bar
+                    //add an event listener for space
                     document.addEventListener("keydown", function (event) {
-                        if (event.keyCode == "32") {
-                        // Refresh the page
-                        location.reload();
+                        if (event.keyCode == 32) {
+                            location.reload();
                         }
                     });
                 }
 
-    }
+    
     }
 
         
