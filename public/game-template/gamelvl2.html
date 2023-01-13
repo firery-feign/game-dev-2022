@@ -73,12 +73,12 @@
                 //creates an enemy in the array
 
                 class Enemy {
-                    constructor(x, y, width, height, color, dx, dy, movepath, speed, enemyType) {
+                    constructor(x, y, width, height, imgsrc, dx, dy, movepath, speed, enemyType) {
                         this.x = x;
                         this.y = y;
                         this.width = width;
                         this.height = height;
-                        this.color = color;
+                        this.img = imgsrc;
                         this.dx = dx;
                         this.dy = dy;
                         this.pathloc = movepath;
@@ -86,8 +86,10 @@
                         this.type = enemyType
                     }
                     draw() {
-                        ctx.fillStyle = this.color;
-                        ctx.fillRect(this.x -25, this.y - 25, this.width, this.height);
+                        var enemyImg = new Image();
+                        enemyImg.src = this.img;
+                        ctx.drawImage(enemyImg, this.x -25, this.y - 25, this.width, this.height)
+                        
                     }
                     update() {
                         this.x += this.dx;
@@ -116,7 +118,7 @@
                     const y = 0;
                     let enemyType = "default";
                     let randEnemyGen = Math.floor(Math.random() * 5) + 1;
-                    console.log(randEnemyGen);
+                    
 
                     //deciding which enemy to spawn
                     switch(randEnemyGen) {
@@ -144,13 +146,13 @@
 
                     switch(enemyType) {
                         case "default":
-                            enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2, enemyType));
+                            enemyArray.push(new Enemy(x, y, 50, 50, "default.png", 0, 0, 1, 2, enemyType));
                             break;
                         case "sprinter": 
-                            enemyArray.push(new Enemy(x, 0, 50, 50, "purple", 0, 0, 1, 4, enemyType));
+                            enemyArray.push(new Enemy(x, 0, 50, 50, "Sprinter.png", 0, 0, 1, 4, enemyType));
                             break;
                         case "bomber":
-                            enemyArray.push(new Enemy(x, 0, 50, 50, "green", 0, 0, 1, 1, enemyType));
+                            enemyArray.push(new Enemy(x, 0, 50, 50, "bomber.png", 0, 0, 1, 1, enemyType));
                             break;
                     }
 
@@ -160,103 +162,79 @@
                 }
 
 
-                //enemy bullet array
-                // const enemyBulletArray = [];
+                class EnemyBullet {
+                    constructor(x, y) {
+                        this.x = x;
+                        this.y = y;
+                        this.img = "EnemyBulletSprite.png";
+                    }
+                    draw() {
+                        var bulletImg = new Image();
+                        bulletImg.src = this.img;
+                        ctx.drawImage(bulletImg, this.x, this.y, 20, 20);
+                    }
+                    update() {
+                        this.y += 5; //move the bullet down the screen
+                        enemyBulletCollision();
+                    }
+                }
+
+                //create an array to hold the enemy bullets
+                let enemyBulletArray = [];
+
+                //create a function to instantiate and add a bullet to the canvas
+                function fireEnemyBullet(x, y) {
+                    let newEnemyBullet = new EnemyBullet(x, y);
+                    enemyBulletArray.push(newEnemyBullet);
+                }
+
+                function updateDraw() {
+                    //in your game loop, add the following to update and draw the enemy bullets
+                    enemyBulletArray.forEach(bullet => {
+                        bullet.update();
+                        bullet.draw();
+                    });
+                }
+
+                function bulletSpawn() {
+                    for (let i = 0; i < enemyArray.length; i++) {
+                        if (enemyArray[i].type == "bomber") {
+                            console.log("bullet spawned")
+                            fireEnemyBullet(enemyArray[i].x, enemyArray[i].y);
+                        } else {
+                            console.log("not a bomber, or bullet failed to spawn")
+                        }
+                    }
+                }
 
 
-                //enemy bullet class
-                // class enemyBullet {
-                //     constructor(x, y, width, height, imgSrc, dx, dy) {
-                //         this.x = x;
-                //         this.y = y;
-                //         this.width = width;
-                //         this.height = height;
-                //         this.img1 = new Image();
-                //         this.img1.src = imgSrc;
-                //         this.dx = dx;
-                //         this.dy = dy;
-                //         this.img1.onload = function(){
-                //         handleEnemyBullets();
-                //         }
-                //     }
-                //     draw() {
-                //         ctx.drawImage(this.img1, this.x, this.y, this.width, this.height)
-                //     }
-                //     update() {
-                //         this.x += this.dx;
-                //         this.y += this.dy;
-                //     }
-                // }
-
-                //shows the bullet on the canvas
-                // function handleEnemyBullets() {
-                // ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // player.draw()
-                // handleEnemies()
+                setInterval(bulletSpawn, 2000)
+                setInterval(updateDraw, 15)
                 
-                // bulletArray.forEach(enemyBullet => {
-                //     enemyBullet.update();
-                //     enemyBullet.draw();
-                // });
-                // }
-
-                //move the bullet upwards on the canvas
-                // function moveEnemyBullet() {
-                //     enemyBulletArray.forEach(enemyBullet => enemyBullet.y += 10);
-                //     handleEnemyBullets();
-                //     enemyBulletCollision();
-                
-                //     for (i = 0; i < enemyBulletArray.length; i++) {
-                //         if (enemyBulletArray[i].y < 0) {
-                //         enemyBulletArray.splice(i, 1);
-                //         }
-                //         myScore();
-                //     }
-                // }
-
-                // function addEnemyBullet() {
-                //     for (i = 0; i < enemyArray.length; i++) {
-                //         if (enemyArray[i].type == "bomber") {
-                //             console.log("EnemyBullet spawned")
-                //             enemyBulletArray.push(new enemyBullet(enemyArray[i].x, enemyArray[i].y, 15, 15, "EnemyBulletSprite.png", 0, 0));
-                //             console.log(enemyBulletArray)
-                //         } else {
-                //             console.log("EnemyBullet failed to spawn")
-                //         }
-                //     }
-                    
-
-                   
-
-                // }
-
-                // setInterval(addEnemyBullet, 2000)
-                // setInterval(moveEnemyBullet, 15)
-                // setInterval(handleEnemyBullets, 15)
 
 
-                // function enemyBulletCollision() {
+                function enemyBulletCollision() {
 
-                //     for (let i = 0; i < enemyBulletArray.length; i++) {
+                    for (let i = 0; i < enemyBulletArray.length; i++) {
                         
-                //         const enemybullet = enemyBulletArray[i];
-                //         const players = player;
-                //         const dx = enemybullet.x - player.x;
-                //         const dy = enemybullet.y - player.y;
-                //         const distance = Math.sqrt(dx * dx + dy * dy);
+                        const enemybullet = enemyBulletArray[i];
+                        const players = player;
+                        const dx = enemybullet.x - player.x;
+                        const dy = enemybullet.y - player.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                //         if (distance < 30) {
-                //             console.log(enemyBulletArray[i])
-                //             enemyBulletArray.splice(i, 1);
-                //             i--;
-                //             console.log("EnemyBullet hit player")
-                //             gameOver()
-                //         }
-                //         }
+                        if (distance < 30) {
+                            console.log(enemyBulletArray[i])
+                            enemyBulletArray.splice(i, 1);
+                            i--;
+                            console.log("EnemyBullet hit player")
+                            gameOver()
+                        }
+                        }
                     
-                // }
+                }
 
-                //move the enemy downwards on the canvas
+                // move the enemy downwards on the canvas
                 function moveEnemy() {
                     handleEnemies();
                     collisionDetection();
@@ -634,7 +612,7 @@
                         const dy = bullet.y - enemy.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < 30) {
-                            console.log(bulletArray[i])
+                            
                             bulletArray.splice(i, 1);
                             enemyArray.splice(j, 1);
                             i--;
@@ -678,7 +656,7 @@
                         
                         player.move(player.speed, 0);
                         
-                        console.log(player);
+                        
                         myScore()
                         
                     } else if (event.keyCode == 65) {
@@ -686,13 +664,13 @@
                         
                         player.move(-player.speed, 0);
                         
-                        console.log(player);
+                        
                         myScore()
                         
                     } else if (event.keyCode == 87 && canShoot) {
                         handleBullets();
                         addBullet();
-                        console.log(bulletArray);
+                        
                         myScore()
                         canShoot = false;
                         setTimeout(() => {
