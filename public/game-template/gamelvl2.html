@@ -35,31 +35,33 @@
 
         function gameStart() {
             if (gameRunning == true) {
-                    
-                //create player object.
+                    //the player object
                 var player = {
                     x: 500,
                     y: 550,
                     width: 50,
                     height: 50,
                     speed: 10,
-                    dx: 0,
-                    dy: 0,
+                    targetX: 500,
+                    targetY: 550,
                     img: "PlayerModel.png",
-                    
                     draw: function () {
                         var playerImg = new Image();
                         playerImg.src = this.img;
                         ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
                     },
                     update: function () {
-                        this.x += this.dx;
-                        this.y += this.dy;
+                        this.x += (this.targetX - this.x) * 0.1;
+                        this.y += (this.targetY - this.y) * 0.1;
+                    },
+                    move: function (dx, dy) {
+                        this.targetX += dx;
+                        this.targetY += dy;
                     },
                     clear: function () {
-                    ctx.clearRect(this.x, this.y, this.width, this.height);
+                        ctx.clearRect(this.x, this.y, this.width, this.height);
                     }
-                        
+
                 }
                 
 
@@ -110,30 +112,149 @@
 
                 //add enemy to the array
                 function addEnemy() {
-                    const x = 950;
+                    const x = Math.floor(Math.random() * (canvas.width - 75) + 25);
                     const y = 0;
                     let enemyType = "default";
-                    let randEnemyGen = Math.floor(Math.random() * 3) + 1;
+                    let randEnemyGen = Math.floor(Math.random() * 5) + 1;
                     console.log(randEnemyGen);
 
                     //deciding which enemy to spawn
                     switch(randEnemyGen) {
                         case 1: 
                             enemyType = "default";
+                            
                             break;
                         case 2:
                             enemyType = "sprinter";
+                            
                             break;
                         case 3:
                             enemyType = "bomber";
+                            
                             break;
-                        
+                        case 4:
+                            enemyType = "default";
+                            
+                            break;
+                        case 5:
+                            enemyType = "default";
+                            
+                            break;
+                    }
+
+                    switch(enemyType) {
+                        case "default":
+                            enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2, enemyType));
+                            break;
+                        case "sprinter": 
+                            enemyArray.push(new Enemy(x, 0, 50, 50, "purple", 0, 0, 1, 4, enemyType));
+                            break;
+                        case "bomber":
+                            enemyArray.push(new Enemy(x, 0, 50, 50, "green", 0, 0, 1, 1, enemyType));
+                            break;
                     }
 
 
-                    enemyArray.push(new Enemy(x, y, 50, 50, "blue", 0, 0, 1, 2, "default"));
+                    
                     handleEnemies();
                 }
+
+
+                //enemy bullet array
+                // const enemyBulletArray = [];
+
+
+                //enemy bullet class
+                // class enemyBullet {
+                //     constructor(x, y, width, height, imgSrc, dx, dy) {
+                //         this.x = x;
+                //         this.y = y;
+                //         this.width = width;
+                //         this.height = height;
+                //         this.img1 = new Image();
+                //         this.img1.src = imgSrc;
+                //         this.dx = dx;
+                //         this.dy = dy;
+                //         this.img1.onload = function(){
+                //         handleEnemyBullets();
+                //         }
+                //     }
+                //     draw() {
+                //         ctx.drawImage(this.img1, this.x, this.y, this.width, this.height)
+                //     }
+                //     update() {
+                //         this.x += this.dx;
+                //         this.y += this.dy;
+                //     }
+                // }
+
+                //shows the bullet on the canvas
+                // function handleEnemyBullets() {
+                // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // player.draw()
+                // handleEnemies()
+                
+                // bulletArray.forEach(enemyBullet => {
+                //     enemyBullet.update();
+                //     enemyBullet.draw();
+                // });
+                // }
+
+                //move the bullet upwards on the canvas
+                // function moveEnemyBullet() {
+                //     enemyBulletArray.forEach(enemyBullet => enemyBullet.y += 10);
+                //     handleEnemyBullets();
+                //     enemyBulletCollision();
+                
+                //     for (i = 0; i < enemyBulletArray.length; i++) {
+                //         if (enemyBulletArray[i].y < 0) {
+                //         enemyBulletArray.splice(i, 1);
+                //         }
+                //         myScore();
+                //     }
+                // }
+
+                // function addEnemyBullet() {
+                //     for (i = 0; i < enemyArray.length; i++) {
+                //         if (enemyArray[i].type == "bomber") {
+                //             console.log("EnemyBullet spawned")
+                //             enemyBulletArray.push(new enemyBullet(enemyArray[i].x, enemyArray[i].y, 15, 15, "EnemyBulletSprite.png", 0, 0));
+                //             console.log(enemyBulletArray)
+                //         } else {
+                //             console.log("EnemyBullet failed to spawn")
+                //         }
+                //     }
+                    
+
+                   
+
+                // }
+
+                // setInterval(addEnemyBullet, 2000)
+                // setInterval(moveEnemyBullet, 15)
+                // setInterval(handleEnemyBullets, 15)
+
+
+                // function enemyBulletCollision() {
+
+                //     for (let i = 0; i < enemyBulletArray.length; i++) {
+                        
+                //         const enemybullet = enemyBulletArray[i];
+                //         const players = player;
+                //         const dx = enemybullet.x - player.x;
+                //         const dy = enemybullet.y - player.y;
+                //         const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                //         if (distance < 30) {
+                //             console.log(enemyBulletArray[i])
+                //             enemyBulletArray.splice(i, 1);
+                //             i--;
+                //             console.log("EnemyBullet hit player")
+                //             gameOver()
+                //         }
+                //         }
+                    
+                // }
 
                 //move the enemy downwards on the canvas
                 function moveEnemy() {
@@ -145,130 +266,287 @@
                             break;
                         }
 
-                        switch(enemyArray[i].pathloc) {
+                        switch(enemyArray[i].type) {
+                            case "default":
 
-                        
-                        case 1: 
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 1 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 75) {
-                                enemyArray[i].pathloc = 2;
-                            }
-                            break;
-                        
-                        case 2: 
-                            enemyArray[i].x -= 2;
-                            console.log("enemy array num: " + i + ", step 1 x: " + enemyArray[i].x);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].x <= 25) {
-                                enemyArray[i].pathloc = 3;
-                            }
-                            break;
-                        
-                        
-                        case 3:
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 2 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 150) {
-                                enemyArray[i].pathloc = 4;
-                            }
-                            break;
-                        
-                        case 4 :
-                            enemyArray[i].x += 2;
-                            console.log("enemy array num: " + i + ", step 2 x: " + enemyArray[i].x);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                                if (enemyArray[i].x >= 950) {
-                                    enemyArray[i].pathloc = 5;
+                            switch(enemyArray[i].pathloc) {
+
+                            
+                            case 1: 
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 75) {
+                                    enemyArray[i].pathloc = 2;
                                 }
-                            break;
-                        
-                        case 5:
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 3 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 225) {
-                                enemyArray[i].pathloc = 6;
+                                break;
+                            
+                            case 2: 
+                                enemyArray[i].x -= 2;
+                                
+                                if (enemyArray[i].x <= 25) {
+                                    enemyArray[i].pathloc = 3;
+                                }
+                                break;
+                            
+                            
+                            case 3:
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 150) {
+                                    enemyArray[i].pathloc = 4;
+                                }
+                                break;
+                            
+                            case 4 :
+                                enemyArray[i].x += 2;
+                                
+                                    if (enemyArray[i].x >= 950) {
+                                        enemyArray[i].pathloc = 5;
+                                    }
+                                break;
+                            
+                            case 5:
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 225) {
+                                    enemyArray[i].pathloc = 6;
+                                }
+                                break;
+                            
+                            case 6:
+                                enemyArray[i].x -= 2;
+                                
+                                if (enemyArray[i].x <= 25) {
+                                    enemyArray[i].pathloc = 7;
+                                }
+                                break;
+                            
+                            case 7: 
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 300) {
+                                    enemyArray[i].pathloc = 8;
+                                }
+                                break;
+                            
+                            case 8:
+                                enemyArray[i].x += 2;
+                                
+                                if (enemyArray[i].x >= 950) {
+                                    enemyArray[i].pathloc = 9;
+                                }
+                                break;
+                            
+                            case 9:
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 375) {
+                                    enemyArray[i].pathloc = 10;
+                                }
+                                break;
+                            
+                            case 10:
+                                enemyArray[i].x -= 2;
+                                
+                                if (enemyArray[i].x <= 25) {
+                                    enemyArray[i].pathloc = 11;
+                                }
+                                break;
+                            
+                            case 11: 
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 450) {
+                                    enemyArray[i].pathloc = 12;
+                                }
+                                break;
+                            
+                            case 12:
+                                enemyArray[i].x += 2;
+                                
+                                if (enemyArray[i].x >= 950) {
+                                    enemyArray[i].pathloc = 13;
+                                }
+                                break;
+                            
+                            case 13:
+                                enemyArray[i].y += 2;
+                                
+                                if (enemyArray[i].y >= 600) {
+                                    enemyArray[i].pathloc = 14;
+                                }
+                                break;
                             }
                             break;
-                        
-                        case 6:
-                            enemyArray[i].x -= 2;
-                            console.log("enemy array num: " + i + ", step 3 x: " + enemyArray[i].x);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].x <= 25) {
-                                enemyArray[i].pathloc = 7;
-                            }
-                            break;
-                        
-                        case 7: 
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 4 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 300) {
-                                enemyArray[i].pathloc = 8;
-                            }
-                            break;
-                        
-                        case 8:
-                            enemyArray[i].x += 2;
-                            console.log("enemy array num: " + i + ", step 4 x: " + enemyArray[i].x);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].x >= 950) {
-                                enemyArray[i].pathloc = 9;
-                            }
-                            break;
-                        
-                        case 9:
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 5 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 375) {
-                                enemyArray[i].pathloc = 10;
-                            }
-                            break;
-                        
-                        case 10:
-                            enemyArray[i].x -= 2;
-                            console.log("enemy array num: " + i + ", step 5 x: " + enemyArray[i].x);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].x <= 25) {
-                                enemyArray[i].pathloc = 11;
-                            }
-                            break;
-                        
-                        case 11: 
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 6 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 450) {
-                                enemyArray[i].pathloc = 12;
-                            }
-                            break;
-                        
-                        case 12:
-                            enemyArray[i].x += 2;
-                            console.log("enemy array num: " + i + ", step 6 x: " + enemyArray[i].x);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].x >= 950) {
-                                enemyArray[i].pathloc = 13;
-                            }
-                            break;
-                        
-                        case 13:
-                            enemyArray[i].y += 2;
-                            console.log("enemy array num: " + i + ", step 7 y: " + enemyArray[i].y);
-                            console.log("enemy array num: " + i + ", pathloc: " + enemyArray[i].pathloc);
-                            if (enemyArray[i].y >= 600) {
-                                enemyArray[i].pathloc = 14;
-                            }
-                            break;
+                            //end of case
+
+                            case "sprinter":
+
+                                switch(enemyArray[i].pathloc) {
+                                    case 1: 
+                                        enemyArray[i].y += enemyArray[i].speed ;
+
+                                        
+                                        if (enemyArray[i].y >= 500) {
+                                            enemyArray[i].pathloc = 2;
+                                        }
+                                        break
+                                    case 2:
+                                        enemyArray[i].x += enemyArray[i].speed;
+
+                                        
+                                        if (enemyArray[i].x >= 750) {
+                                            enemyArray[i].pathloc = 3;
+                                        }
+                                        break
+
+                                    case 3: 
+                                        enemyArray[i].y -= enemyArray[i].speed;
+
+                                        
+                                        if (enemyArray[i].y <= 120) {
+                                            enemyArray[i].pathloc = 4;
+                                        }
+                                        break;
+                                    case 4: 
+                                        enemyArray[i].x -= enemyArray[i].speed;
+
+                                        
+                                        if (enemyArray[i].x <= 30) {
+                                            enemyArray[i].pathloc = 5;
+                                        }
+                                        break;
+                                    case 5:
+                                        enemyArray[i].y += enemyArray[i].speed;
+
+                                        
+                                        let random_y = Math.floor(Math.random() * (500 - 150 + 1)) + 150;
+                                        
+                                        if (enemyArray[i].y >= random_y) {
+                                            enemyArray[i].pathloc = 6;
+                                        }
+                                        break;
+                                    case 6: 
+                                        enemyArray[i].x += enemyArray[i].speed
+                                        let random_x = Math.floor(Math.random() * (950 - 50 + 1) + 50);
+
+                                        
+                                        if (enemyArray[i].x >= random_x) {
+                                            enemyArray[i].pathloc = 7;
+                                        }
+                                        break;
+                                    case 7:
+                                        enemyArray[i].y += 4;
+
+                                        
+                                        
+                                        break;
+                                        
+
+                                }
+                                break;
+
+                                case "bomber": 
+
+                                    switch(enemyArray[i].pathloc) {
+                                        case 1:
+                                            enemyArray[i].y += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].y >= 100) {
+                                                enemyArray[i].pathloc = 2;
+                                            }
+                                            break;
+                                        case 2:
+                                            enemyArray[i].x += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].x >= 950) {
+                                                enemyArray[i].pathloc = 3;
+                                            }
+                                            break;
+                                        case 3:
+                                            enemyArray[i].y += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].y >= 200) {
+                                                enemyArray[i].pathloc = 4;
+                                            }
+                                            break;
+                                        case 4:
+                                            enemyArray[i].x -= enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].x <= 25) {
+                                                enemyArray[i].pathloc = 5;
+                                            }
+                                            break;
+                                        case 5:
+                                            enemyArray[i].y += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].y >= 300) {
+                                                enemyArray[i].pathloc = 6;
+                                            }
+                                            break;
+                                        case 6:
+                                            enemyArray[i].x += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].x >= 950) {
+                                                enemyArray[i].pathloc = 7;
+                                            }
+                                            break;
+                                        case 7:
+                                            enemyArray[i].y += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].y >= 400) {
+                                                enemyArray[i].pathloc = 8;
+                                            }
+                                            break;
+                                        case 8:
+                                            enemyArray[i].x -= enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].x <= 25) {
+                                                enemyArray[i].pathloc = 9;
+                                            }
+                                            break;
+                                        case 9:
+                                            enemyArray[i].y += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].y >= 500) {
+                                                enemyArray[i].pathloc = 10;
+                                            }
+                                            break;
+                                        case 10:
+                                            enemyArray[i].x += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].x >= 950) {
+                                                enemyArray[i].pathloc = 11;
+                                            }
+                                            break;
+                                        case 11:
+                                            enemyArray[i].y += enemyArray[i].speed;
+
+                                            
+                                            if (enemyArray[i].y >= 600) {
+                                                enemyArray[i].pathloc = 12;
+                                            }
+                                            break;
+                                    }
+                            
+                             
+                            
+
                         }
+                    }
                         myScore()
 
-                    }
+                    
                         
                 }
                 
@@ -355,7 +633,6 @@
                         const dx = bullet.x - enemy.x;
                         const dy = bullet.y - enemy.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        console.log(distance)
                         if (distance < 30) {
                             console.log(bulletArray[i])
                             bulletArray.splice(i, 1);
@@ -373,6 +650,19 @@
                 setInterval(moveBullet, 25);
                 
 
+                function gameLoop() {
+                    player.clear()
+                    player.update()
+                    player.draw()
+                    canvasCollision()
+                    ctx.beginPath();
+                    ctx.moveTo(0, 525);
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(0, 525, 1000, 5)
+                }
+
+                setInterval(gameLoop, 15)
+
 
 
                 //show enemy in canvas
@@ -384,20 +674,18 @@
 
                 document.addEventListener("keydown", function (event) {
                     if (event.keyCode == 68) {
-                        player.dx = player.speed;
-                        player.clear();
-                        player.update();
-                        canvasCollision()
-                        player.draw();
+                        
+                        
+                        player.move(player.speed, 0);
+                        
                         console.log(player);
                         myScore()
                         
                     } else if (event.keyCode == 65) {
-                        player.dx = -player.speed;
-                        player.clear();
-                        player.update();
-                        canvasCollision()
-                        player.draw();
+                        
+                        
+                        player.move(-player.speed, 0);
+                        
                         console.log(player);
                         myScore()
                         
