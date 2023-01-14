@@ -5,7 +5,7 @@
     }
 
     .canvasBg {
-        background-image: url("space-BG.jpg");
+        background-image: url("Space-BG.jpg");
         background-size: 100% 100%;
         border: 1px solid black;
     }
@@ -108,6 +108,12 @@
                     });
                     player.draw()
                     myScore()
+
+                    ctx.beginPath();
+                    ctx.moveTo(0, 525);
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(0, 525, 1000, 5)
+                    ctx.closePath();
 
                 }
 
@@ -584,6 +590,7 @@
                         bulletArray.splice(i, 1);
                         }
                         myScore();
+                        
                     }
                 }
 
@@ -601,6 +608,8 @@
                     ctx.fillStyle = "white";
                     ctx.fillText("Score: " + score, 20, 30);
                 }
+                let passx = 0;
+                let passy = 0;
 
                 //collision detection
                 function collisionDetection() {
@@ -612,6 +621,8 @@
                         const dy = bullet.y - enemy.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < 30) {
+                            passx = enemyArray[j].x;
+                            passy = enemyArray[j].y;
                             
                             bulletArray.splice(i, 1);
                             enemyArray.splice(j, 1);
@@ -619,13 +630,102 @@
                             j--;
                             score += 1;
                             myScore();
+                            
                         }
                         }
                     }
                     
                 }
 
+                //an array to hold coin values
+                const coinArray = [];
+
+                //coin var
+                let coins = 0;
+
+                //coin class
+
+                class coin {
+                    constructor(x, y, dx, dy)
+                    {
+                        this.x = x;
+                        this.y = y;
+                        this.dx = dx;
+                        this.dy = dy;
+                        this.img = "coin.jpg";
+                        this.width = 35
+                        this.height = 35
+                        }
+                    draw() {
+                        var coinImg = new Image();
+                        coinImg.src = this.img;
+                        ctx.drawImage(coinImg, this.x, this.y, 40, 40);
+                    
+                    }
+                    update() {
+                        this.x += this.dx;
+                        this.y += this.dy;
+                    }
+
+
+                    
+                }
+
+                function coinSpawn() {
+                    var randnum = Math.floor(Math.random() * 100) + 1;
+                    if (randnum <= 50) {
+                        coinArray.push(new coin(passx, passy, 0, 0));
+                    }
+                    coinUpdate()
+                }
+
+                function coinDrop() {
+                    
+                    
+                    coinArray.forEach(coin => {
+                        coin.y += 2; // move the coin down 2 pixels each frame
+                        coinUpdate();
+                    });
+                    
+                }
+
+                //shows the enemy on the canvas
+                function coinUpdate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    player.draw()
+                    coinArray.forEach(coin => {
+                        coin.update();
+                        coin.draw();
+                    });
+                    player.draw()
+                    myScore()
+
+                }
+
+                function coinCollision() {
+                    for (let i = 0; i < coinArray.length; i++) {
+                        const coin = coinArray[i];
+                        const dx = coin.x - player.x;
+                        const dy = coin.y - player.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 30) {
+                            coinArray.splice(i, 1);
+                            i--;
+                            coins += 1;
+                            myCoin()
+                        }
+                    }
+                }
+
+                function myCoin() {
+                    ctx.font = "30px Arial";
+                    ctx.fillStyle = "white";
+                    ctx.fillText("Coins: " + coins, 60, 30);
+                }
+
+                setInterval(coinDrop, 25)
                 setInterval(moveBullet, 25);
+                setInterval(coinCollision, 25);
                 
 
                 function gameLoop() {
@@ -637,6 +737,8 @@
                     ctx.moveTo(0, 525);
                     ctx.fillStyle = "red";
                     ctx.fillRect(0, 525, 1000, 5)
+                    ctx.closePath();
+                    
                 }
 
                 setInterval(gameLoop, 15)
