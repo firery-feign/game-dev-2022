@@ -57,10 +57,8 @@
                     move: function (dx, dy) {
                         this.targetX += dx;
                         this.targetY += dy;
-                    },
-                    clear: function () {
-                        ctx.clearRect(this.x, this.y, this.width, this.height);
                     }
+                    
 
                 }
                 
@@ -101,12 +99,14 @@
                 //shows the enemy on the canvas
                 function handleEnemies() {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    player.draw()
+                    myCoin();
+                    player.draw();
+                    handleCoins();
                     enemyArray.forEach(enemy => {
                         enemy.update();
                         enemy.draw();
                     });
-                    player.draw()
+                    
                     myScore()
 
                     ctx.beginPath();
@@ -200,6 +200,8 @@
                         bullet.update();
                         bullet.draw();
                     });
+                    
+                    
                 }
 
                 function bulletSpawn() {
@@ -528,6 +530,7 @@
 
                         }
                     }
+                    
                         myScore()
 
                     
@@ -570,7 +573,7 @@
 
                 //shows the bullet on the canvas
                 function handleBullets() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
                 player.draw()
                 handleEnemies()
                 
@@ -623,7 +626,7 @@
                         if (distance < 30) {
                             passx = enemyArray[j].x;
                             passy = enemyArray[j].y;
-                            
+                            coinSpawn();
                             bulletArray.splice(i, 1);
                             enemyArray.splice(j, 1);
                             i--;
@@ -652,14 +655,17 @@
                         this.y = y;
                         this.dx = dx;
                         this.dy = dy;
-                        this.img = "coin.jpg";
+                        this.img = new Image();
+                        this.img.src = "Coin.png";
                         this.width = 35
                         this.height = 35
+                        this.img.onload = function(){
+                        handleCoins();
+                        }
                         }
                     draw() {
-                        var coinImg = new Image();
-                        coinImg.src = this.img;
-                        ctx.drawImage(coinImg, this.x, this.y, 40, 40);
+                        
+                        ctx.drawImage(this.img, this.x, this.y, 40, 40);
                     
                     }
                     update() {
@@ -672,26 +678,28 @@
                 }
 
                 function coinSpawn() {
-                    var randnum = Math.floor(Math.random() * 100) + 1;
+                    let randnum = Math.floor(Math.random() * 100) + 1;
+                    console.log("Random num: " + randnum);
                     if (randnum <= 50) {
                         coinArray.push(new coin(passx, passy, 0, 0));
+                        console.log("Coins Spawned");
+                        myCoin();
+                        handleCoins();
                     }
-                    coinUpdate()
-                }
 
-                function coinDrop() {
-                    
-                    
-                    coinArray.forEach(coin => {
-                        coin.y += 2; // move the coin down 2 pixels each frame
-                        coinUpdate();
-                    });
                     
                 }
 
-                //shows the enemy on the canvas
-                function coinUpdate() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                function myCoin() {
+                    handleCoins();
+                    ctx.beginPath();
+                    ctx.font = "30px Arial";
+                    ctx.fillStyle = "white";
+                    ctx.fillText("Coins: " + coins, 150, 30);
+                    ctx.closePath();
+                }
+
+                function handleCoins() {
                     player.draw()
                     coinArray.forEach(coin => {
                         coin.update();
@@ -699,11 +707,16 @@
                     });
                     player.draw()
                     myScore()
-
                 }
 
+                
+
+                
+
                 function coinCollision() {
+                    
                     for (let i = 0; i < coinArray.length; i++) {
+                        handleCoins();
                         const coin = coinArray[i];
                         const dx = coin.x - player.x;
                         const dy = coin.y - player.y;
@@ -717,19 +730,38 @@
                     }
                 }
 
-                function myCoin() {
-                    ctx.font = "30px Arial";
-                    ctx.fillStyle = "white";
-                    ctx.fillText("Coins: " + coins, 60, 30);
+                
+
+                function moveCoin() {
+                    coinArray.forEach(coin => {
+                        coin.y += 2; // move the coin down 2 pixels each frame
+                        handleCoins();
+                        myCoin();
+                        coinCollision();
+                        
+                    });
+                    for (let i = 0; i > coinArray.length; i++) {
+                        
+                        if (coinArray[i].y < 0) {
+                        coinArray.splice(i, 1);
+                        }
+                        myScore();
+                        handleCoins();
+                        myCoin();
+                        
+                    
+                    }
                 }
 
-                setInterval(coinDrop, 25)
+                
                 setInterval(moveBullet, 25);
-                setInterval(coinCollision, 25);
+                
+                
+                setInterval(moveCoin, 25)
                 
 
                 function gameLoop() {
-                    player.clear()
+                    
                     player.update()
                     player.draw()
                     canvasCollision()
@@ -737,6 +769,11 @@
                     ctx.moveTo(0, 525);
                     ctx.fillStyle = "red";
                     ctx.fillRect(0, 525, 1000, 5)
+                    ctx.closePath();
+                    ctx.beginPath();
+                    ctx.font = "30px Arial";
+                    ctx.fillStyle = "white";
+                    ctx.fillText("Coins: " + coins, 150, 30);
                     ctx.closePath();
                     
                 }
