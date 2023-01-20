@@ -22,7 +22,16 @@
     <h1 align="center">Level 2 / Invaders.exe</h1>
     <h3 align="center">"a" and "d" to move left or right, "w" to shoot</h3>
     <p align="center">Don't let them land!</p>
-    <input type="button" id="button01" onclick="{gameStart(); document.getElementById('button01').disabled = true}" value="Start Game"><br>
+    <input type="button" id="button01" onclick="{gameStart(); document.getElementById('button01').disabled = true}" value="Start Game"> <Input type=button value="Increase fire rate, 10 coins" onclick="{
+        
+        if (coins >= 10) {
+            shootySpeed -= 50;
+            console.log(shootySpeed)
+            coins -= 10;
+            myCoin();
+            
+        }
+        }"> <br>
     <canvas id="myCanvas" class="canvasBg" width="1000" height="600"></canvas>
     <script>
         //get canvas element
@@ -32,6 +41,10 @@
 
         let gameRunning = true
         
+        let shootySpeed = 500;
+
+        //coin var
+        let coins = 0;
 
         function gameStart() {
             if (gameRunning == true) {
@@ -48,7 +61,7 @@
                     draw: function () {
                         var playerImg = new Image();
                         playerImg.src = this.img;
-                        ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
+                        ctx.drawImage(playerImg, this.x-25, this.y, this.width, this.height);
                     },
                     update: function () {
                         this.x += (this.targetX - this.x) * 0.1;
@@ -192,13 +205,21 @@
                 function fireEnemyBullet(x, y) {
                     let newEnemyBullet = new EnemyBullet(x, y);
                     enemyBulletArray.push(newEnemyBullet);
+                    updateDraw();
                 }
 
                 function updateDraw() {
+                    for (let i = 0; i < enemyArray.length; i++) {
+                        if (enemyArray[i].y > 600) {
+                            enemyArray.splice(i, 1);
+                        }
+                    }
                     //in your game loop, add the following to update and draw the enemy bullets
                     enemyBulletArray.forEach(bullet => {
                         bullet.update();
                         bullet.draw();
+
+                        
                     });
                     
                     
@@ -209,6 +230,7 @@
                         if (enemyArray[i].type == "bomber") {
                             console.log("bullet spawned")
                             fireEnemyBullet(enemyArray[i].x, enemyArray[i].y);
+                            updateDraw()
                         } else {
                             console.log("not a bomber, or bullet failed to spawn")
                         }
@@ -232,7 +254,8 @@
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
                         if (distance < 30) {
-                            console.log(enemyBulletArray[i])
+                            
+                            
                             enemyBulletArray.splice(i, 1);
                             i--;
                             console.log("EnemyBullet hit player")
@@ -598,7 +621,7 @@
                 }
 
                 function addBullet() {
-                    bulletArray.push(new Bullet(player.x + 25, player.y, 7, 12, "Bullet.png", 0, 0));
+                    bulletArray.push(new Bullet(player.x, player.y, 7, 12, "Bullet.png", 0, 0));
 
                 }
 
@@ -623,7 +646,7 @@
                         const dx = bullet.x - enemy.x;
                         const dy = bullet.y - enemy.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 30) {
+                        if (distance < 28) {
                             passx = enemyArray[j].x;
                             passy = enemyArray[j].y;
                             coinSpawn();
@@ -643,8 +666,7 @@
                 //an array to hold coin values
                 const coinArray = [];
 
-                //coin var
-                let coins = 0;
+                
 
                 //coin class
 
@@ -657,15 +679,15 @@
                         this.dy = dy;
                         this.img = new Image();
                         this.img.src = "Coin.png";
-                        this.width = 35
-                        this.height = 35
+                        this.width = 36
+                        this.height = 36
                         this.img.onload = function(){
                         handleCoins();
                         }
                         }
                     draw() {
                         
-                        ctx.drawImage(this.img, this.x, this.y, 40, 40);
+                        ctx.drawImage(this.img, this.x-18, this.y-18, 40, 40);
                     
                     }
                     update() {
@@ -780,6 +802,14 @@
 
                 setInterval(gameLoop, 15)
 
+                function upgradeFireRate() {
+                    if (coins >= 10) {
+                        shootySpeed -= 25
+                        coins -= 10
+                        myCoin()
+                    }
+                }
+
 
 
                 //show enemy in canvas
@@ -787,6 +817,7 @@
                 player.draw()
 
                 let canShoot = true
+                
 
 
                 document.addEventListener("keydown", function (event) {
@@ -814,7 +845,7 @@
                         canShoot = false;
                         setTimeout(() => {
                             canShoot = true;
-                        }   , 500);
+                        }   , shootySpeed);
                     }
                 });
                 
@@ -867,4 +898,5 @@
 
         
     </script>
+    
 </body>
