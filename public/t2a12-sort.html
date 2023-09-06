@@ -3,6 +3,8 @@
         background-color: linear-gradient(blue, orange);
         overflow: hidden;
         background-repeat: no-repeat;
+        background-image:url('download.jpg');
+        background-size:100% 100%;
     }
     .divs {
         position: absolute;
@@ -47,7 +49,7 @@
             let myCanvas=document.getElementById('myCanvas');
             let ctx=myCanvas.getContext('2d');
 
-            var myMax = 50
+            var myMax = 100
             const myCards = [3,8,1]  
             running = false
 
@@ -68,7 +70,7 @@
                     
                     do {
                         // Generating random number
-                        const randomNumber = Math.floor(Math.random() * 50) + 1
+                        const randomNumber = Math.floor(Math.random() * 100) + 1
                     
                         // Pushing into the myCards only 
                         // if the myCards does not contain it
@@ -134,7 +136,7 @@
                             myCards[j + 1] = temp;
                         }
                         draw()
-                    }}, i * 100)
+                    }}, i * 150)
                     
                 }
                 
@@ -146,7 +148,7 @@
                 ctx.beginPath();
                 //a loop which draws the cards on the canvas with relative heights
                 for (let i = 0; i < myCards.length; i++) {
-                    ctx.rect(10 + (i * 22), 10, 10, myCards[i] * 10);
+                    ctx.rect(5 + (i * 11), 5, 5, myCards[i] * 5);
                     ctx.stroke();
                 }
                 
