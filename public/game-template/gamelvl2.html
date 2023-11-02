@@ -31,7 +31,7 @@
             myCoin();
             
         }
-        }"> <br>
+        }"> <input type="button" value="Upgrade Speed" onclick="{speedIncrease(); }"><br> <br>
     <canvas id="myCanvas" class="canvasBg" width="1000" height="600"></canvas>
     <script>
         //get canvas element
@@ -811,6 +811,15 @@
                 }
 
 
+                function speedIncrease() {
+                    if (coins >= 5) {
+                        player.speed += 5;
+                        coins -= 5
+                        myCoin()
+                    }
+                }
+
+
 
                 //show enemy in canvas
                 handleEnemies();
@@ -898,5 +907,5 @@
 
     //yes yes this is just for a git upload
     </script>
-    
+    <input type="button" value="Upgrade Speed" onclick="{speedIncrease(); }">
 </body>
