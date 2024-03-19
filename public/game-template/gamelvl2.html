@@ -244,6 +244,7 @@
 
 
                 function enemyBulletCollision() {
+                    requestAnimationFrame(EnemyBulletCollision)
 
                     for (let i = 0; i < enemyBulletArray.length; i++) {
                         
@@ -597,19 +598,19 @@
                 //shows the bullet on the canvas
                 function handleBullets() {
                 
-                player.draw()
+                requestAnimationFrame(handleBullets)
                 handleEnemies()
                 
                 bulletArray.forEach(bullet => {
                     bullet.update();
-                    bullet.draw();
+
                 });
                 }
 
                 //move the bullet upwards on the canvas
                 function moveBullet() {
                     bulletArray.forEach(bullet => bullet.y -= 10);
-                    handleBullets();
+                    requestAnimationFrame(moveBullet)
                 
                     for (i = 0; i < bulletArray.length; i++) {
                         if (bulletArray[i].y < 0) {
