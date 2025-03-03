@@ -1,4 +1,4 @@
-# game-dev-2022
+# game-dev
 
 https://firery-feign.github.io/game-dev-2022/public/
 
